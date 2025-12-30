@@ -1,0 +1,17 @@
+flowchart LR
+  U[User] --> W[Next.js Web]
+  W --> R[Runtime API (FastAPI)]
+
+  R -->|steps + tool calls| TR[Tool Router]
+  R -->|trace events| TEL[Telemetry Adapter]
+
+  R --> PG[(Postgres)]
+  R --> RD[(Redis Queue)]
+
+  subgraph OA[Orchestration Adapter]
+    A[OrchestratorAdapter\n(LangGraph/AutoGen later)]
+  end
+
+  R --> A
+
+
