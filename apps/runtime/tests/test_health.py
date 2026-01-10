@@ -1,6 +1,9 @@
 def test_health_endpoint(client):
-    """Test that health endpoint returns 200 OK."""
-    response = client.get("/health")
+    """Test that health endpoint returns 200 OK with expected fields."""
+    response = client.get("/api/v1/health")
     assert response.status_code == 200
-    assert response.json() == {"status": "ok"}
+    data = response.json()
+    assert data["status"] == "ok"
+    assert "timestamp" in data
+    assert data["service"] == "agentops-runtime"
 
