@@ -14,6 +14,9 @@ class Settings(BaseSettings):
     # Redis
     redis_url: str = "redis://localhost:6379"
 
+    # CORS
+    cors_origins: list[str] = ["*"]
+
     # LLM Provider (to be configured)
     # openai_api_key: str | None = None
     # anthropic_api_key: str | None = None
