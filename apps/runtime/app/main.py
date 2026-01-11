@@ -1,11 +1,23 @@
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.health import router as health_router
 from app.api.root import router as root_router
 from app.core.config import settings
+from app.utils.logger import logger
 
-app = FastAPI(title="AgentOps Runtime", version="0.1.0")
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Startup and shutdown events."""
+    logger.info("Starting AgentOps Runtime...")
+    yield
+    logger.info("Shutting down AgentOps Runtime...")
+
+
+app = FastAPI(title="AgentOps Runtime", version="0.1.0", lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
