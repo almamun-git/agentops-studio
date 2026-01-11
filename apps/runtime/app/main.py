@@ -27,6 +27,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+from app.api.exceptions import global_exception_handler
+
+app.add_exception_handler(Exception, global_exception_handler)
+
 app.include_router(root_router)
 app.include_router(health_router, prefix="/api/v1", tags=["health"])
 
