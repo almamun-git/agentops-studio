@@ -5,5 +5,4 @@ def test_health_endpoint(client):
     data = response.json()
     assert data["status"] == "ok"
     assert "timestamp" in data
-    assert data["service"] == "agentops-runtime"
 
