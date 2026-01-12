@@ -1,4 +1,4 @@
-.PHONY: help infra-up infra-down dev-runtime test clean
+.PHONY: help infra-up infra-down dev-runtime test check-env clean
 
 help:
 	@echo "AgentOps Studio - Common Commands"
@@ -7,6 +7,7 @@ help:
 	@echo "  make infra-down    - Stop local infrastructure"
 	@echo "  make dev-runtime   - Run runtime API in dev mode"
 	@echo "  make test          - Run tests"
+	@echo "  make check-env     - Validate environment configuration"
 	@echo "  make clean         - Clean Python cache files"
 
 infra-up:
@@ -26,6 +27,10 @@ dev-runtime:
 test:
 	cd apps/runtime && \
 	python -m pytest tests/ -v
+
+check-env:
+	cd apps/runtime && \
+	python -m scripts.check_env
 
 clean:
 	find . -type d -name __pycache__ -exec rm -r {} + 2>/dev/null || true
