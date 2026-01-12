@@ -40,6 +40,14 @@ uvicorn app.main:app --reload --port 8000
 Verify:
 - http://localhost:8000/health
 
+### API Documentation
+
+See [docs/api.md](docs/api.md) for API endpoint documentation.
+
+### Project Status
+
+🚧 **Early Development** - Core structure and API foundation in place.
+
 ### Next steps
 
 - Define core data model: Run, Step, ToolCall, MemoryItem, EvalRun
