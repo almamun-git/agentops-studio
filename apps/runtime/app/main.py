@@ -4,6 +4,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.health import router as health_router
+from app.api.memory.router import router as memory_router
 from app.api.root import router as root_router
 from app.api.runs.router import router as runs_router
 from app.core.config import settings
@@ -35,5 +36,6 @@ app.add_exception_handler(Exception, global_exception_handler)
 app.include_router(root_router)
 app.include_router(health_router, prefix="/api/v1", tags=["health"])
 app.include_router(runs_router, prefix="/api/v1/runs", tags=["runs"])
+app.include_router(memory_router, prefix="/api/v1/memory", tags=["memory"])
 
 
