@@ -3,6 +3,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from app.api.eval.router import router as eval_router
 from app.api.health import router as health_router
 from app.api.memory.router import router as memory_router
 from app.api.root import router as root_router
@@ -37,5 +38,6 @@ app.include_router(root_router)
 app.include_router(health_router, prefix="/api/v1", tags=["health"])
 app.include_router(runs_router, prefix="/api/v1/runs", tags=["runs"])
 app.include_router(memory_router, prefix="/api/v1/memory", tags=["memory"])
+app.include_router(eval_router, prefix="/api/v1/eval", tags=["eval"])
 
 
