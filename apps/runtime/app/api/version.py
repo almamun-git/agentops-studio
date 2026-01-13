@@ -1,5 +1,7 @@
 from fastapi import APIRouter
 
+from app.core.metadata import API_VERSION, APP_VERSION
+
 router = APIRouter()
 
 
@@ -7,7 +9,7 @@ router = APIRouter()
 def get_version():
     """Get API version information."""
     return {
-        "version": "0.1.0",
-        "api_version": "v1",
+        "version": APP_VERSION,
+        "api_version": API_VERSION,
     }
 
