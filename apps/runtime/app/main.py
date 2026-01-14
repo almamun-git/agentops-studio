@@ -10,6 +10,7 @@ from app.api.root import router as root_router
 from app.api.runs.router import router as runs_router
 from app.api.version import router as version_router
 from app.core.config import settings
+from app.core.metadata import APP_NAME, APP_VERSION
 from app.utils.logger import logger
 
 
@@ -21,7 +22,7 @@ async def lifespan(app: FastAPI):
     logger.info("Shutting down AgentOps Runtime...")
 
 
-app = FastAPI(title="AgentOps Runtime", version="0.1.0", lifespan=lifespan)
+app = FastAPI(title=APP_NAME, version=APP_VERSION, lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
