@@ -17,6 +17,9 @@ class Settings(BaseSettings):
     # CORS
     cors_origins: list[str] = ["*"]
 
+    # Logging
+    log_level: str = "INFO"
+
     # LLM Provider (to be configured)
     # openai_api_key: str | None = None
     # anthropic_api_key: str | None = None
