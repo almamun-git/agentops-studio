@@ -6,7 +6,7 @@ router = APIRouter()
 
 
 @router.get("/version")
-def get_version():
+def get_version() -> dict:
     """Get API version information."""
     return {
         "version": APP_VERSION,

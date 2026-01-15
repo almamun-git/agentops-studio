@@ -48,6 +48,12 @@ See [docs/api.md](docs/api.md) for API endpoint documentation.
 
 🚧 **Early Development** - Core structure and API foundation in place.
 
+### CI / CD
+
+- GitHub Actions workflows:
+  - `ci.yml` – runs tests for the runtime service
+  - `lint.yml` – placeholder for future linting (ruff/flake8)
+
 ### Next steps
 
 - Define core data model: Run, Step, ToolCall, MemoryItem, EvalRun
