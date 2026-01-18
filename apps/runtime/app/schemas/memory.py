@@ -2,12 +2,7 @@
 
 from pydantic import BaseModel
 
-
-class MemoryItem(BaseModel):
-    """Memory item schema."""
-    key: str
-    value: dict
-    metadata: dict | None = None
+from app.models.core import MemoryItem
 
 
 class MemoryResponse(BaseModel):
