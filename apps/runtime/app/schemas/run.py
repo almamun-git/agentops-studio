@@ -1,9 +1,10 @@
 """Run-related schemas."""
 
 from datetime import datetime
-from typing import Literal
 
 from pydantic import BaseModel
+
+from app.models.core import RunStatus, Step, ToolCall
 
 
 class RunCreate(BaseModel):
@@ -16,6 +17,20 @@ class RunResponse(BaseModel):
     """Schema for run response."""
     run_id: str
     workflow_id: str
-    status: Literal["pending", "running", "completed", "failed"]
+    status: RunStatus
     created_at: datetime
+
+
+class ToolCallResponse(ToolCall):
+    """Schema for tool call response."""
+
+
+class StepResponse(Step):
+    """Schema for step response."""
+
+
+class RunDetailResponse(RunResponse):
+    """Schema for run response with steps."""
+
+    steps: list[StepResponse]
 
