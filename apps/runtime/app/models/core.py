@@ -1,0 +1,84 @@
+"""Core domain data models."""
+
+from __future__ import annotations
+
+from datetime import datetime
+from typing import Literal
+
+from pydantic import BaseModel, Field
+
+RunStatus = Literal["pending", "running", "completed", "failed"]
+StepStatus = Literal["pending", "running", "completed", "failed"]
+ToolCallStatus = Literal["pending", "running", "completed", "failed"]
+EvalStatus = Literal["pending", "running", "completed", "failed"]
+
+
+class ToolCall(BaseModel):
+    """Tool call performed during a step."""
+
+    tool_call_id: str
+    tool_name: str
+    input: dict
+    output: dict | None = None
+    status: ToolCallStatus = "pending"
+    started_at: datetime | None = None
+    finished_at: datetime | None = None
+    error: str | None = None
+    metadata: dict | None = None
+
+
+class Step(BaseModel):
+    """Single step inside a run."""
+
+    step_id: str
+    run_id: str
+    name: str
+    status: StepStatus = "pending"
+    input: dict | None = None
+    output: dict | None = None
+    tool_calls: list[ToolCall] = Field(default_factory=list)
+    started_at: datetime | None = None
+    finished_at: datetime | None = None
+    error: str | None = None
+    metadata: dict | None = None
+
+
+class Run(BaseModel):
+    """Top-level workflow run."""
+
+    run_id: str
+    workflow_id: str
+    status: RunStatus = "pending"
+    created_at: datetime
+    started_at: datetime | None = None
+    finished_at: datetime | None = None
+    input: dict
+    output: dict | None = None
+    steps: list[Step] = Field(default_factory=list)
+    metadata: dict | None = None
+
+
+class MemoryItem(BaseModel):
+    """Stored memory item."""
+
+    memory_id: str
+    user_id: str
+    key: str
+    value: dict
+    metadata: dict | None = None
+    created_at: datetime
+    updated_at: datetime | None = None
+
+
+class EvalRun(BaseModel):
+    """Evaluation run for a workflow or agent."""
+
+    eval_id: str
+    run_id: str | None = None
+    status: EvalStatus = "pending"
+    created_at: datetime
+    started_at: datetime | None = None
+    finished_at: datetime | None = None
+    results: dict | None = None
+    metrics: dict | None = None
+    metadata: dict | None = None
