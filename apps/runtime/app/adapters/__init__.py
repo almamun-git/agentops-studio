@@ -7,9 +7,11 @@ from app.adapters.interfaces import (
     TelemetryAdapter,
     VectorStoreAdapter,
 )
+from app.adapters.registry import AdapterRegistry
 
 __all__ = [
     "AdapterError",
+    "AdapterRegistry",
     "LLMAdapter",
     "OrchestratorAdapter",
     "TelemetryAdapter",
