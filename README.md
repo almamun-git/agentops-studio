@@ -43,6 +43,8 @@ Verify:
 ### API Documentation
 
 See [docs/api.md](docs/api.md) for API endpoint documentation.
+See [docs/data-model.md](docs/data-model.md) for core domain model definitions.
+See [docs/adapters.md](docs/adapters.md) for adapter interfaces.
 
 ### Project Status
 

@@ -1,9 +1,18 @@
-"""Adapter interfaces for orchestrator, LLM, vector store, telemetry.
+"""Adapter interfaces for orchestrator, LLM, vector store, telemetry."""
 
-Each adapter implements a stable contract so implementations can be swapped
-without changing the core runtime API.
+from app.adapters.interfaces import (
+    AdapterError,
+    LLMAdapter,
+    OrchestratorAdapter,
+    TelemetryAdapter,
+    VectorStoreAdapter,
+)
 
-Concrete implementations (e.g. LangGraph, AutoGen, Semantic Kernel) will live
-in submodules such as `orchestrator.langgraph` or `orchestrator.autogen`.
-"""
+__all__ = [
+    "AdapterError",
+    "LLMAdapter",
+    "OrchestratorAdapter",
+    "TelemetryAdapter",
+    "VectorStoreAdapter",
+]
 
