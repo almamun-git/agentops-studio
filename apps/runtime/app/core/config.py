@@ -20,6 +20,12 @@ class Settings(BaseSettings):
     # Logging
     log_level: str = "INFO"
 
+    # Adapters (defaults target local/in-memory implementations)
+    orchestrator_adapter: str = "inmemory"
+    llm_adapter: str = "echo"
+    vector_store_adapter: str = "inmemory"
+    telemetry_adapter: str = "inmemory"
+
     # LLM Provider (to be configured)
     # openai_api_key: str | None = None
     # anthropic_api_key: str | None = None
