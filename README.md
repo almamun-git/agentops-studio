@@ -40,6 +40,11 @@ uvicorn app.main:app --reload --port 8000
 Verify:
 - http://localhost:8000/health
 
+### Adapter configuration
+
+The runtime defaults to local in-memory adapters. Override via env vars:
+`ORCHESTRATOR_ADAPTER`, `LLM_ADAPTER`, `VECTOR_STORE_ADAPTER`, `TELEMETRY_ADAPTER`.
+
 ### API Documentation
 
 See [docs/api.md](docs/api.md) for API endpoint documentation.
