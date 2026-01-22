@@ -1,6 +1,5 @@
 """Common schemas."""
 
-from datetime import datetime
 from typing import Literal
 
 from pydantic import BaseModel
@@ -9,7 +8,7 @@ from pydantic import BaseModel
 class StatusResponse(BaseModel):
     """Status response schema."""
     status: Literal["ok", "error"]
-    timestamp: datetime
+    timestamp: str
 
 
 class ErrorResponse(BaseModel):
