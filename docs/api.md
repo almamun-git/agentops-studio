@@ -5,6 +5,7 @@
 
 ### Health
 - `GET /health` returns service status.
+  - `timestamp` is returned as an ISO-8601 UTC datetime.
 
 ### Version
 - `GET /version` returns API version metadata.
