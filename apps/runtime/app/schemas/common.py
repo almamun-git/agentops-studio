@@ -17,3 +17,12 @@ class ErrorResponse(BaseModel):
     detail: str
     code: str | None = None
 
+
+class RootResponse(BaseModel):
+    """Root endpoint response schema."""
+    name: str
+    version: str
+    docs: str
+    api_base: str
+    version_endpoint: str
+
