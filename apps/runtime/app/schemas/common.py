@@ -26,3 +26,9 @@ class RootResponse(BaseModel):
     api_base: str
     version_endpoint: str
 
+
+class VersionResponse(BaseModel):
+    """Version endpoint response schema."""
+    version: str
+    api_version: str
+
