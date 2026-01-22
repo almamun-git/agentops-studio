@@ -1,5 +1,6 @@
 from fastapi import APIRouter
 
+from app.core.constants import API_V1_PREFIX
 from app.core.metadata import APP_NAME, APP_VERSION
 
 router = APIRouter()
@@ -12,5 +13,7 @@ def root() -> dict:
         "name": APP_NAME,
         "version": APP_VERSION,
         "docs": "/docs",
+        "api_base": API_V1_PREFIX,
+        "version_endpoint": f"{API_V1_PREFIX}/version",
     }
 
