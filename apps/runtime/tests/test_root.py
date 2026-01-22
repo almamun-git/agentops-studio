@@ -6,4 +6,6 @@ def test_root_endpoint(client):
     assert data["name"] == "AgentOps Runtime"
     assert data["version"] == "0.1.0"
     assert "docs" in data
+    assert data["api_base"] == "/api/v1"
+    assert data["version_endpoint"] == "/api/v1/version"
 
