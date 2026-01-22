@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 
 from app.schemas.common import StatusResponse
-from app.utils.time import utc_now
+from app.utils.time import format_timestamp, utc_now
 
 router = APIRouter()
 
@@ -11,7 +11,7 @@ def health():
     """Health check endpoint."""
     return StatusResponse(
         status="ok",
-        timestamp=utc_now(),
+        timestamp=format_timestamp(utc_now()),
     )
 
 
