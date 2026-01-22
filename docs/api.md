@@ -1,5 +1,8 @@
 ## Runtime API
 
+### Root
+- `GET /` returns basic service metadata and API base paths.
+
 ### Health
 - `GET /health` returns service status.
 
