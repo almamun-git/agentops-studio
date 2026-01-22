@@ -32,3 +32,11 @@ class VersionResponse(BaseModel):
     version: str
     api_version: str
 
+
+__all__ = [
+    "ErrorResponse",
+    "RootResponse",
+    "StatusResponse",
+    "VersionResponse",
+]
+
