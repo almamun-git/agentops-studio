@@ -9,3 +9,6 @@ RUN_STATUS_FAILED = "failed"
 # Pagination
 DEFAULT_PAGE_SIZE = 20
 MAX_PAGE_SIZE = 100
+
+# API
+API_V1_PREFIX = "/api/v1"
