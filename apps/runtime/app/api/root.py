@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from app.core.constants import API_V1_PREFIX
+from app.core.constants import API_V1_PREFIX, DOCS_PATH
 from app.core.metadata import APP_NAME, APP_VERSION
 from app.schemas.common import RootResponse
 
@@ -13,7 +13,7 @@ def root() -> RootResponse:
     return RootResponse(
         name=APP_NAME,
         version=APP_VERSION,
-        docs="/docs",
+        docs=DOCS_PATH,
         api_base=API_V1_PREFIX,
         version_endpoint=f"{API_V1_PREFIX}/version",
     )
