@@ -1,3 +1,6 @@
+from app.core.constants import API_V1_PREFIX
+
+
 def test_root_endpoint(client):
     """Test that root endpoint returns API information."""
     response = client.get("/")
@@ -6,6 +9,6 @@ def test_root_endpoint(client):
     assert data["name"] == "AgentOps Runtime"
     assert data["version"] == "0.1.0"
     assert "docs" in data
-    assert data["api_base"] == "/api/v1"
-    assert data["version_endpoint"] == "/api/v1/version"
+    assert data["api_base"] == API_V1_PREFIX
+    assert data["version_endpoint"] == f"{API_V1_PREFIX}/version"
 
