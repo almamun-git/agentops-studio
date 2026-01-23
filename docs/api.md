@@ -3,6 +3,7 @@
 ### Root
 - `GET /` returns basic service metadata and API base paths.
   - `api_base` currently defaults to `/api/v1`.
+  - `docs` points to `/docs` for interactive API docs.
 
 ### Health
 - `GET /health` returns service status.
