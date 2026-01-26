@@ -1,12 +1,33 @@
-## apps/web
+AgentOps Studio web UI (Next.js + Tailwind).
 
-This will contain the Next.js UI (chat, run trace, memory, eval dashboards).
+## Getting Started
 
-Suggested scaffold:
+Install dependencies and run the dev server:
 
 ```bash
-cd apps
-npx create-next-app@latest web --ts --eslint --tailwind --app
+npm install
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
+Open [http://localhost:3000](http://localhost:3000) to view the UI.
 
+Configure the runtime API base (optional):
+
+```bash
+export NEXT_PUBLIC_RUNTIME_BASE="http://localhost:8000/api/v1"
+```
+
+The home page uses `src/app/page.tsx`.
+
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+
+## Notes
+
+- This UI is a lightweight console for the runtime API.
+- Extend it with pages for runs, memory, and evals as the backend matures.
