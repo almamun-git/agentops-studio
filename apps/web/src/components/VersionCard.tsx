@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 
+import { getRuntimeBase } from "@/lib/runtime";
+
 type VersionPayload = {
   version: string;
   api_version: string;
@@ -12,12 +14,9 @@ type VersionState =
   | { state: "ready"; payload: VersionPayload }
   | { state: "error"; message: string };
 
-const defaultRuntimeBase = "http://localhost:8000/api/v1";
-
 export function VersionCard() {
   const [version, setVersion] = useState<VersionState>({ state: "idle" });
-  const runtimeBase =
-    process.env.NEXT_PUBLIC_RUNTIME_BASE ?? defaultRuntimeBase;
+  const runtimeBase = getRuntimeBase();
 
   useEffect(() => {
     let cancelled = false;
