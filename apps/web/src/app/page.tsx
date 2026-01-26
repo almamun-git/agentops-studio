@@ -22,9 +22,17 @@ export default function Home() {
             </p>
             <h1 className="text-2xl font-semibold">Runtime Console</h1>
           </div>
-          <span className="rounded-full border border-slate-700 px-3 py-1 text-xs text-slate-300">
-            Early Preview
-          </span>
+          <div className="flex items-center gap-3 text-xs text-slate-300">
+            <a
+              className="rounded-full border border-slate-700 px-3 py-1 hover:border-emerald-400 hover:text-emerald-300"
+              href="/runs"
+            >
+              Runs
+            </a>
+            <span className="rounded-full border border-slate-700 px-3 py-1">
+              Early Preview
+            </span>
+          </div>
         </div>
       </header>
 
