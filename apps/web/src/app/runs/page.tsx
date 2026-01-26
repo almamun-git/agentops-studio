@@ -2,11 +2,10 @@
 
 import { useState } from "react";
 
-const defaultRuntimeBase = "http://localhost:8000/api/v1";
+import { getRuntimeBase } from "@/lib/runtime";
 
 export default function RunsPage() {
-  const runtimeBase =
-    process.env.NEXT_PUBLIC_RUNTIME_BASE ?? defaultRuntimeBase;
+  const runtimeBase = getRuntimeBase();
   const [workflowId, setWorkflowId] = useState("demo-workflow");
   const [inputJson, setInputJson] = useState('{"prompt":"hello"}');
   const [result, setResult] = useState<string | null>(null);
