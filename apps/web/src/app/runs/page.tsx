@@ -30,7 +30,9 @@ export default function RunsPage() {
 
       const payload = await response.json();
       if (!response.ok) {
-        throw new Error(payload?.detail ?? "Failed to create run");
+        const message =
+          payload?.detail ?? `Failed to create run (${response.status})`;
+        throw new Error(`${message} | URL: ${runtimeBase}/runs`);
       }
 
       setResult(JSON.stringify(payload, null, 2));
@@ -54,6 +56,10 @@ export default function RunsPage() {
           <h2 className="text-lg font-semibold">Create a run</h2>
           <p className="mt-2 text-sm text-slate-300">
             Send a run request to the runtime API.
+          </p>
+          <p className="mt-2 text-xs text-slate-400">
+            Runtime base:{" "}
+            <span className="font-mono text-slate-200">{runtimeBase}</span>
           </p>
           <div className="mt-4 grid gap-4">
             <label className="text-xs uppercase text-slate-400">
