@@ -1,3 +1,5 @@
+import { HealthCard } from "@/components/HealthCard";
+
 export default function Home() {
   const runtimeBase =
     process.env.NEXT_PUBLIC_RUNTIME_BASE ?? "http://localhost:8000/api/v1";
@@ -70,6 +72,7 @@ export default function Home() {
         </section>
 
         <aside className="space-y-6">
+          <HealthCard />
           <div className="rounded-2xl border border-slate-800 bg-slate-900/40 p-6">
             <h2 className="text-lg font-semibold">Quick start</h2>
             <ol className="mt-3 space-y-2 text-sm text-slate-300">
