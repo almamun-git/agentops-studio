@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 
+import { getRuntimeBase } from "@/lib/runtime";
+
 type HealthPayload = {
   status: "ok" | "error";
   timestamp: string;
@@ -12,12 +14,9 @@ type HealthState =
   | { state: "ready"; payload: HealthPayload }
   | { state: "error"; message: string };
 
-const defaultRuntimeBase = "http://localhost:8000/api/v1";
-
 export function HealthCard() {
   const [health, setHealth] = useState<HealthState>({ state: "idle" });
-  const runtimeBase =
-    process.env.NEXT_PUBLIC_RUNTIME_BASE ?? defaultRuntimeBase;
+  const runtimeBase = getRuntimeBase();
 
   useEffect(() => {
     let cancelled = false;
