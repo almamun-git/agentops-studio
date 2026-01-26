@@ -12,3 +12,4 @@ MAX_PAGE_SIZE = 100
 
 # API
 API_V1_PREFIX = "/api/v1"
+DOCS_PATH = "/docs"
