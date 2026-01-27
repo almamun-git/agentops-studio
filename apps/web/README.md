@@ -23,6 +23,12 @@ Configure the runtime API base (optional):
 export NEXT_PUBLIC_RUNTIME_BASE="http://localhost:8000/api/v1"
 ```
 
+Or add `apps/web/.env.local` with:
+
+```
+NEXT_PUBLIC_RUNTIME_BASE=http://localhost:8000/api/v1
+```
+
 The home page uses `src/app/page.tsx`.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
