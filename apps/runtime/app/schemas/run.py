@@ -34,3 +34,9 @@ class RunDetailResponse(RunResponse):
 
     steps: list[StepResponse]
 
+
+class RunListResponse(BaseModel):
+    """Schema for listing runs."""
+
+    runs: list[RunResponse]
+
