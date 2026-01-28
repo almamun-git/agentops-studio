@@ -3,7 +3,7 @@ from datetime import datetime, timezone
 from fastapi import APIRouter
 
 from app.models.core import Run, Step, ToolCall
-from app.schemas.run import RunCreate, RunDetailResponse
+from app.schemas.run import RunCreate, RunDetailResponse, RunListResponse, RunResponse
 from app.utils.id import generate_run_id, generate_step_id
 
 router = APIRouter()
@@ -61,6 +61,17 @@ async def create_run(payload: RunCreate) -> RunDetailResponse:
     _RUN_STORE[run_id] = run
 
     return RunDetailResponse(**run.model_dump())
+
+
+@router.get("/", response_model=RunListResponse)
+async def list_runs() -> RunListResponse:
+    """List recent workflow runs."""
+    runs = sorted(
+        _RUN_STORE.values(),
+        key=lambda item: item.created_at,
+        reverse=True,
+    )
+    return RunListResponse(runs=[RunResponse(**run.model_dump()) for run in runs])
 
 
 @router.get("/{run_id}", response_model=RunDetailResponse)
