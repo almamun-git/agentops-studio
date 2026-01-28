@@ -18,10 +18,12 @@ export default function RunsPage() {
     created_at: string;
   }> | null>(null);
   const [runsError, setRunsError] = useState<string | null>(null);
+  const [runsLoading, setRunsLoading] = useState(false);
 
   const loadRuns = async () => {
     try {
       setRunsError(null);
+      setRunsLoading(true);
       const response = await fetch(`${runtimeBase}/runs`);
       if (!response.ok) {
         throw new Error(`Failed to load runs (${response.status})`);
@@ -30,6 +32,8 @@ export default function RunsPage() {
       setRuns(payload.runs ?? []);
     } catch (err) {
       setRunsError(err instanceof Error ? err.message : "Unknown error");
+    } finally {
+      setRunsLoading(false);
     }
   };
 
@@ -143,6 +147,9 @@ export default function RunsPage() {
             <p className="mt-3 text-sm text-rose-200">{runsError}</p>
           ) : null}
           <div className="mt-4 space-y-3">
+            {runsLoading ? (
+              <p className="text-sm text-slate-400">Loading runs...</p>
+            ) : null}
             {(runs ?? []).map((run) => (
               <div
                 key={run.run_id}
