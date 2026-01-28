@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { getRuntimeBase } from "@/lib/runtime";
 
@@ -11,6 +11,31 @@ export default function RunsPage() {
   const [result, setResult] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [runs, setRuns] = useState<Array<{
+    run_id: string;
+    workflow_id: string;
+    status: string;
+    created_at: string;
+  }> | null>(null);
+  const [runsError, setRunsError] = useState<string | null>(null);
+
+  const loadRuns = async () => {
+    try {
+      setRunsError(null);
+      const response = await fetch(`${runtimeBase}/runs`);
+      if (!response.ok) {
+        throw new Error(`Failed to load runs (${response.status})`);
+      }
+      const payload = (await response.json()) as { runs?: typeof runs };
+      setRuns(payload.runs ?? []);
+    } catch (err) {
+      setRunsError(err instanceof Error ? err.message : "Unknown error");
+    }
+  };
+
+  useEffect(() => {
+    loadRuns();
+  }, [runtimeBase]);
 
   const handleSubmit = async () => {
     setResult(null);
