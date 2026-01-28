@@ -65,6 +65,7 @@ export default function RunsPage() {
       }
 
       setResult(JSON.stringify(payload, null, 2));
+      loadRuns();
     } catch (err) {
       setError(err instanceof Error ? err.message : "Unknown error");
     } finally {
