@@ -128,6 +128,45 @@ export default function RunsPage() {
             ) : null}
           </div>
         </div>
+        <div className="mt-6 rounded-2xl border border-slate-800 bg-slate-900/40 p-6">
+          <div className="flex items-center justify-between">
+            <h2 className="text-lg font-semibold">Recent runs</h2>
+            <button
+              className="text-xs text-slate-300 hover:text-emerald-300"
+              type="button"
+              onClick={loadRuns}
+            >
+              Refresh
+            </button>
+          </div>
+          {runsError ? (
+            <p className="mt-3 text-sm text-rose-200">{runsError}</p>
+          ) : null}
+          <div className="mt-4 space-y-3">
+            {(runs ?? []).map((run) => (
+              <div
+                key={run.run_id}
+                className="flex items-center justify-between rounded-xl border border-slate-800 bg-slate-950 px-4 py-3 text-sm"
+              >
+                <div>
+                  <p className="font-medium text-slate-100">
+                    {run.workflow_id}
+                  </p>
+                  <p className="text-xs text-slate-400">{run.run_id}</p>
+                </div>
+                <div className="text-right">
+                  <p className="text-xs uppercase text-slate-400">
+                    {run.status}
+                  </p>
+                  <p className="text-xs text-slate-500">{run.created_at}</p>
+                </div>
+              </div>
+            ))}
+            {runs && runs.length === 0 ? (
+              <p className="text-sm text-slate-400">No runs yet.</p>
+            ) : null}
+          </div>
+        </div>
       </div>
     </div>
   );
