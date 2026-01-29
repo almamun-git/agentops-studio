@@ -78,9 +78,26 @@ export default function RunDetailPage({
             <p className="mt-4 text-sm text-rose-200">{detail.message}</p>
           ) : null}
           {detail.state === "ready" ? (
-            <p className="mt-4 text-sm text-slate-300">
-              Created at {formatTimestamp(detail.payload.created_at)}
-            </p>
+            <div className="mt-4 grid gap-2 text-sm text-slate-300">
+              <p>
+                Workflow:{" "}
+                <span className="font-medium text-slate-100">
+                  {detail.payload.workflow_id}
+                </span>
+              </p>
+              <p>
+                Status:{" "}
+                <span className="uppercase text-slate-400">
+                  {detail.payload.status}
+                </span>
+              </p>
+              <p className="text-xs text-slate-400">
+                Run ID: {detail.payload.run_id}
+              </p>
+              <p className="text-xs text-slate-400">
+                Created at {formatTimestamp(detail.payload.created_at)}
+              </p>
+            </div>
           ) : null}
         </div>
       </div>
