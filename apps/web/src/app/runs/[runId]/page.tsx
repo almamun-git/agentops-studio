@@ -33,31 +33,33 @@ export default function RunDetailPage({
   const runtimeBase = getRuntimeBase();
   const [detail, setDetail] = useState<RunDetailState>({ state: "idle" });
 
+  const loadRun = async () => {
+    try {
+      setDetail({ state: "loading" });
+      const response = await fetch(`${runtimeBase}/runs/${params.runId}`);
+      if (!response.ok) {
+        throw new Error(`Failed to load run (${response.status})`);
+      }
+      const payload = (await response.json()) as RunDetail;
+      setDetail({ state: "ready", payload });
+    } catch (err) {
+      setDetail({
+        state: "error",
+        message: err instanceof Error ? err.message : "Unknown error",
+      });
+    }
+  };
+
   useEffect(() => {
     let cancelled = false;
 
-    const loadRun = async () => {
-      try {
-        setDetail({ state: "loading" });
-        const response = await fetch(`${runtimeBase}/runs/${params.runId}`);
-        if (!response.ok) {
-          throw new Error(`Failed to load run (${response.status})`);
-        }
-        const payload = (await response.json()) as RunDetail;
-        if (!cancelled) {
-          setDetail({ state: "ready", payload });
-        }
-      } catch (err) {
-        if (!cancelled) {
-          setDetail({
-            state: "error",
-            message: err instanceof Error ? err.message : "Unknown error",
-          });
-        }
+    const load = async () => {
+      if (!cancelled) {
+        await loadRun();
       }
     };
 
-    loadRun();
+    load();
     return () => {
       cancelled = true;
     };
@@ -67,7 +69,16 @@ export default function RunDetailPage({
     <div className="min-h-screen bg-slate-950 text-slate-100">
       <div className="mx-auto max-w-5xl px-6 py-10">
         <div className="rounded-2xl border border-slate-800 bg-slate-900/40 p-6">
-          <h1 className="text-2xl font-semibold">Run detail</h1>
+          <div className="flex items-center justify-between">
+            <h1 className="text-2xl font-semibold">Run detail</h1>
+            <button
+              className="text-xs text-slate-300 hover:text-emerald-300"
+              type="button"
+              onClick={loadRun}
+            >
+              Refresh
+            </button>
+          </div>
           <p className="mt-2 text-sm text-slate-300">
             Select a run to view its steps, status, and outputs.
           </p>
