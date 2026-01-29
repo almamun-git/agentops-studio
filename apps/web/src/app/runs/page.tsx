@@ -161,7 +161,12 @@ export default function RunsPage() {
                   <p className="font-medium text-slate-100">
                     {run.workflow_id}
                   </p>
-                  <p className="text-xs text-slate-400">{run.run_id}</p>
+                  <a
+                    className="text-xs text-emerald-300 hover:text-emerald-200"
+                    href={`/runs/${run.run_id}`}
+                  >
+                    {run.run_id}
+                  </a>
                 </div>
                 <div className="text-right">
                   <p className="text-xs uppercase text-slate-400">
