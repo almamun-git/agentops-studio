@@ -1,4 +1,68 @@
-export default function RunDetailPage() {
+"use client";
+
+import { useEffect, useState } from "react";
+
+import { formatTimestamp } from "@/lib/format";
+import { getRuntimeBase } from "@/lib/runtime";
+
+type RunDetail = {
+  run_id: string;
+  workflow_id: string;
+  status: string;
+  created_at: string;
+  steps: Array<{
+    step_id: string;
+    name: string;
+    status: string;
+    started_at: string | null;
+    finished_at: string | null;
+    output: Record<string, unknown> | null;
+  }>;
+};
+
+type RunDetailState =
+  | { state: "idle" | "loading" }
+  | { state: "ready"; payload: RunDetail }
+  | { state: "error"; message: string };
+
+export default function RunDetailPage({
+  params,
+}: {
+  params: { runId: string };
+}) {
+  const runtimeBase = getRuntimeBase();
+  const [detail, setDetail] = useState<RunDetailState>({ state: "idle" });
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const loadRun = async () => {
+      try {
+        setDetail({ state: "loading" });
+        const response = await fetch(`${runtimeBase}/runs/${params.runId}`);
+        if (!response.ok) {
+          throw new Error(`Failed to load run (${response.status})`);
+        }
+        const payload = (await response.json()) as RunDetail;
+        if (!cancelled) {
+          setDetail({ state: "ready", payload });
+        }
+      } catch (err) {
+        if (!cancelled) {
+          setDetail({
+            state: "error",
+            message: err instanceof Error ? err.message : "Unknown error",
+          });
+        }
+      }
+    };
+
+    loadRun();
+    return () => {
+      cancelled = true;
+    };
+  }, [runtimeBase, params.runId]);
+
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100">
       <div className="mx-auto max-w-5xl px-6 py-10">
@@ -7,6 +71,17 @@ export default function RunDetailPage() {
           <p className="mt-2 text-sm text-slate-300">
             Select a run to view its steps, status, and outputs.
           </p>
+          {detail.state === "loading" ? (
+            <p className="mt-4 text-sm text-slate-400">Loading run...</p>
+          ) : null}
+          {detail.state === "error" ? (
+            <p className="mt-4 text-sm text-rose-200">{detail.message}</p>
+          ) : null}
+          {detail.state === "ready" ? (
+            <p className="mt-4 text-sm text-slate-300">
+              Created at {formatTimestamp(detail.payload.created_at)}
+            </p>
+          ) : null}
         </div>
       </div>
     </div>
