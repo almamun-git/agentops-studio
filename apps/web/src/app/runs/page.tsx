@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 
+import { formatTimestamp } from "@/lib/format";
 import { getRuntimeBase } from "@/lib/runtime";
 
 export default function RunsPage() {
@@ -166,7 +167,9 @@ export default function RunsPage() {
                   <p className="text-xs uppercase text-slate-400">
                     {run.status}
                   </p>
-                  <p className="text-xs text-slate-500">{run.created_at}</p>
+                  <p className="text-xs text-slate-500">
+                    {formatTimestamp(run.created_at)}
+                  </p>
                 </div>
               </div>
             ))}
