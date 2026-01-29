@@ -14,6 +14,7 @@
 
 ### Runs
 - `POST /runs` create a new run.
+- `GET /runs` list recent runs.
 - `GET /runs/{run_id}` fetch a run.
 
 ### Memory
