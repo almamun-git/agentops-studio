@@ -100,6 +100,32 @@ export default function RunDetailPage({
             </div>
           ) : null}
         </div>
+        {detail.state === "ready" ? (
+          <div className="mt-6 rounded-2xl border border-slate-800 bg-slate-900/40 p-6">
+            <h2 className="text-lg font-semibold">Steps</h2>
+            <div className="mt-4 space-y-3">
+              {detail.payload.steps.map((step) => (
+                <div
+                  key={step.step_id}
+                  className="rounded-xl border border-slate-800 bg-slate-950 px-4 py-3"
+                >
+                  <div className="flex items-center justify-between text-sm">
+                    <p className="font-medium text-slate-100">{step.name}</p>
+                    <p className="text-xs uppercase text-slate-400">
+                      {step.status}
+                    </p>
+                  </div>
+                  <p className="mt-2 text-xs text-slate-400">
+                    {step.step_id}
+                  </p>
+                </div>
+              ))}
+              {detail.payload.steps.length === 0 ? (
+                <p className="text-sm text-slate-400">No steps available.</p>
+              ) : null}
+            </div>
+          </div>
+        ) : null}
       </div>
     </div>
   );
