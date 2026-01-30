@@ -12,3 +12,8 @@ def generate_step_id() -> str:
     """Generate a unique step ID."""
     return f"step_{uuid.uuid4().hex[:12]}"
 
+
+def generate_memory_id() -> str:
+    """Generate a unique memory ID."""
+    return f"mem_{uuid.uuid4().hex[:12]}"
+
