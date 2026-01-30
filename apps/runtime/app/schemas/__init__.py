@@ -3,12 +3,17 @@
 from app.schemas.common import ErrorResponse, RootResponse, StatusResponse, VersionResponse
 from app.schemas.eval import EvalRunResponse
 from app.schemas.memory import MemoryResponse
+from app.schemas.rag import RagIngestRequest, RagIngestResponse, RagQueryRequest, RagQueryResponse
 from app.schemas.run import RunCreate, RunDetailResponse, RunListResponse, RunResponse
 
 __all__ = [
     "ErrorResponse",
     "EvalRunResponse",
     "MemoryResponse",
+    "RagIngestRequest",
+    "RagIngestResponse",
+    "RagQueryRequest",
+    "RagQueryResponse",
     "RootResponse",
     "RunCreate",
     "RunDetailResponse",
