@@ -6,6 +6,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.api.eval.router import router as eval_router
 from app.api.health import router as health_router
 from app.api.memory.router import router as memory_router
+from app.api.rag.router import router as rag_router
 from app.api.root import router as root_router
 from app.api.runs.router import router as runs_router
 from app.api.version import router as version_router
@@ -43,5 +44,6 @@ app.include_router(health_router, prefix=API_V1_PREFIX, tags=["health"])
 app.include_router(runs_router, prefix=f"{API_V1_PREFIX}/runs", tags=["runs"])
 app.include_router(memory_router, prefix=f"{API_V1_PREFIX}/memory", tags=["memory"])
 app.include_router(eval_router, prefix=f"{API_V1_PREFIX}/eval", tags=["eval"])
+app.include_router(rag_router, prefix=f"{API_V1_PREFIX}/rag", tags=["rag"])
 
 
