@@ -20,6 +20,10 @@
 ### Memory
 - `GET /memory/{user_id}` fetch memory items for a user.
 
+### RAG
+- `POST /rag/ingest` ingest documents for retrieval.
+- `POST /rag/query` query documents for a user.
+
 ### Eval
 - `POST /eval` trigger an evaluation run.
 
