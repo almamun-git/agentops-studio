@@ -40,6 +40,24 @@ uvicorn app.main:app --reload --port 8000
 Verify:
 - http://localhost:8000/health
 
+### RAG quickstart
+
+Ingest documents:
+
+```bash
+curl -X POST http://localhost:8000/api/v1/rag/ingest \
+  -H "Content-Type: application/json" \
+  -d '{"user_id":"user-1","documents":[{"text":"Mars mission summary","metadata":{"source":"notes"}}]}'
+```
+
+Query documents:
+
+```bash
+curl -X POST http://localhost:8000/api/v1/rag/query \
+  -H "Content-Type: application/json" \
+  -d '{"user_id":"user-1","query":"mars mission","top_k":3}'
+```
+
 ### Adapter configuration
 
 The runtime defaults to local in-memory adapters. Override via env vars:
