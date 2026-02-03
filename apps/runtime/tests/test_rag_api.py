@@ -14,6 +14,7 @@ def test_rag_ingest_and_query(client):
     data = ingest_response.json()
     assert data["user_id"] == "user-99"
     assert len(data["documents"]) == 2
+    assert data["documents"][0]["created_at"]
 
     query_payload = {"user_id": "user-99", "query": "retrieval generation", "top_k": 2, "min_score": 0.5}
     query_response = client.post(f"{API_V1_PREFIX}/rag/query", json=query_payload)
