@@ -15,10 +15,12 @@ class InMemoryVectorStore:
         self._items: dict[str, dict[str, MemoryItem]] = {}
 
     async def upsert(self, items: list[MemoryItem]) -> None:
+        """Store or update memory items, keyed by user and memory id."""
         for item in items:
             self._items.setdefault(item.user_id, {})[item.memory_id] = item
 
     async def query(self, user_id: str, query: str, *, limit: int = 10) -> list[MemoryItem]:
+        """Return items whose key or value contain any query token."""
         tokens = re.findall(r"[a-z0-9]+", query.lower())
         candidates = self._items.get(user_id, {}).values()
         if not tokens:
@@ -31,6 +33,7 @@ class InMemoryVectorStore:
         return matches[:limit]
 
     async def delete(self, memory_id: str) -> None:
+        """Remove a memory item by id."""
         for user_items in self._items.values():
             if memory_id in user_items:
                 del user_items[memory_id]
