@@ -12,6 +12,8 @@ from app.models.core import MemoryItem
 from app.schemas.rag import RagDocument, RagDocumentIn, RagMatch
 from app.utils.id import generate_memory_id
 
+_CANDIDATE_MULTIPLIER = 3
+
 
 def _tokenize(text: str) -> list[str]:
     return re.findall(r"[a-z0-9]+", text.lower())
@@ -70,7 +72,11 @@ class RagService:
     async def query(self, user_id: str, query: str, top_k: int, *, min_score: float = 0.0) -> list[RagMatch]:
         if top_k <= 0:
             return []
-        candidates = await self._vector_store.query(user_id, query, limit=top_k * 3)
+        candidates = await self._vector_store.query(
+            user_id,
+            query,
+            limit=top_k * _CANDIDATE_MULTIPLIER,
+        )
         scored: list[tuple[float, MemoryItem]] = []
 
         for item in candidates:
