@@ -22,8 +22,10 @@
 
 ### RAG
 - `POST /rag/ingest` ingest documents for retrieval.
+  - Responses include document `created_at` timestamps.
 - `POST /rag/query` query documents for a user.
   - `min_score` (0.0-1.0) filters low-scoring matches.
+- Query matches include document `created_at`.
 - `DELETE /rag/{doc_id}` delete a stored document by id.
 
 ### Eval
