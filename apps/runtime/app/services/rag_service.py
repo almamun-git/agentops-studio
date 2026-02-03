@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
+import json
 import re
-from collections import Counter
 from datetime import datetime, timezone
 
 from app.adapters.factory import get_vector_store
@@ -17,13 +17,24 @@ def _tokenize(text: str) -> list[str]:
     return re.findall(r"[a-z0-9]+", text.lower())
 
 
+def _metadata_text(metadata: dict | None) -> str:
+    if not metadata:
+        return ""
+    try:
+        return json.dumps(metadata, sort_keys=True, default=str)
+    except TypeError:
+        return " ".join(str(value) for value in metadata.values())
+
+
 def _score(query: str, text: str) -> float:
-    query_tokens = _tokenize(query)
+    query_tokens = set(_tokenize(query))
     if not query_tokens:
         return 0.0
-    text_counts = Counter(_tokenize(text))
-    hits = sum(text_counts.get(token, 0) for token in query_tokens)
-    return hits / max(len(query_tokens), 1)
+    text_tokens = set(_tokenize(text))
+    if not text_tokens:
+        return 0.0
+    hits = len(query_tokens.intersection(text_tokens))
+    return hits / len(query_tokens)
 
 
 class RagService:
@@ -56,15 +67,20 @@ class RagService:
 
         return stored
 
-    async def query(self, user_id: str, query: str, top_k: int) -> list[RagMatch]:
+    async def query(self, user_id: str, query: str, top_k: int, *, min_score: float = 0.0) -> list[RagMatch]:
         candidates = await self._vector_store.query(user_id, query, limit=top_k * 3)
         scored: list[tuple[float, MemoryItem]] = []
 
         for item in candidates:
             text = str(item.value.get("text", ""))
-            scored.append((_score(query, text), item))
+            metadata = item.value.get("metadata")
+            content = f"{text} {_metadata_text(metadata)}".strip()
+            score = _score(query, content)
+            if score <= 0.0 or score < min_score:
+                continue
+            scored.append((score, item))
 
-        scored.sort(key=lambda pair: pair[0], reverse=True)
+        scored.sort(key=lambda pair: (pair[0], pair[1].created_at), reverse=True)
 
         matches: list[RagMatch] = []
         for score, item in scored[:top_k]:
@@ -74,10 +90,14 @@ class RagService:
                     text=str(item.value.get("text", "")),
                     metadata=item.value.get("metadata"),
                     score=score,
+                    created_at=item.created_at,
                 )
             )
 
         return matches
+
+    async def delete(self, doc_id: str) -> None:
+        await self._vector_store.delete(doc_id)
 
 
 def get_rag_service() -> RagService:
