@@ -18,6 +18,7 @@ class RagDocument(BaseModel):
     doc_id: str
     text: str
     metadata: dict | None = None
+    created_at: datetime
 
 
 class RagMatch(BaseModel):
