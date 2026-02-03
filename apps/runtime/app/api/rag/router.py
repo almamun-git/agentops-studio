@@ -9,7 +9,7 @@ from app.schemas.rag import (
 )
 from app.services.rag_service import RagService, get_rag_service
 
-router = APIRouter()
+router = APIRouter(tags=["RAG"])
 
 
 @router.post("/ingest", response_model=RagIngestResponse)
