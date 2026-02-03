@@ -49,9 +49,14 @@ class RagQueryRequest(BaseModel):
     """Query documents from the RAG store."""
 
     user_id: str
-    query: str = Field(..., min_length=1)
-    top_k: int = Field(default=5, ge=1, le=50)
-    min_score: float = Field(default=0.0, ge=0.0, le=1.0)
+    query: str = Field(..., min_length=1, description="Search query text.")
+    top_k: int = Field(default=5, ge=1, le=50, description="Max matches to return.")
+    min_score: float = Field(
+        default=0.0,
+        ge=0.0,
+        le=1.0,
+        description="Minimum relevance score required to return a match.",
+    )
 
 
 class RagQueryResponse(BaseModel):
