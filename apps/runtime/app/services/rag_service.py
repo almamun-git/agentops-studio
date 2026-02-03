@@ -68,6 +68,8 @@ class RagService:
         return stored
 
     async def query(self, user_id: str, query: str, top_k: int, *, min_score: float = 0.0) -> list[RagMatch]:
+        if top_k <= 0:
+            return []
         candidates = await self._vector_store.query(user_id, query, limit=top_k * 3)
         scored: list[tuple[float, MemoryItem]] = []
 
