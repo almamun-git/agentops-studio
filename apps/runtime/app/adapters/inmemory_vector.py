@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import re
 
 from app.models.core import MemoryItem
 
@@ -18,14 +19,15 @@ class InMemoryVectorStore:
             self._items.setdefault(item.user_id, {})[item.memory_id] = item
 
     async def query(self, user_id: str, query: str, *, limit: int = 10) -> list[MemoryItem]:
-        needle = query.lower()
+        tokens = re.findall(r"[a-z0-9]+", query.lower())
         candidates = self._items.get(user_id, {}).values()
-        matches = [
-            item
-            for item in candidates
-            if needle in item.key.lower()
-            or needle in json.dumps(item.value, sort_keys=True).lower()
-        ]
+        if not tokens:
+            return []
+        matches = []
+        for item in candidates:
+            haystack = f"{item.key} {json.dumps(item.value, sort_keys=True)}".lower()
+            if any(token in haystack for token in tokens):
+                matches.append(item)
         return matches[:limit]
 
     async def delete(self, memory_id: str) -> None:
