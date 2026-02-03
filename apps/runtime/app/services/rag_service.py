@@ -62,7 +62,14 @@ class RagService:
                 created_at=now,
             )
             items.append(item)
-            stored.append(RagDocument(doc_id=doc_id, text=doc.text, metadata=doc.metadata))
+            stored.append(
+                RagDocument(
+                    doc_id=doc_id,
+                    text=doc.text,
+                    metadata=doc.metadata,
+                    created_at=now,
+                )
+            )
 
         if items:
             await self._vector_store.upsert(items)
