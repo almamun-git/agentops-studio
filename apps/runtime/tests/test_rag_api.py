@@ -23,6 +23,7 @@ def test_rag_ingest_and_query(client):
     assert query_data["user_id"] == "user-99"
     assert query_data["query"] == "retrieval generation"
     assert query_data["matches"]
+    assert query_data["matches"][0]["created_at"]
 
     doc_id = data["documents"][0]["doc_id"]
     delete_response = client.delete(f"{API_V1_PREFIX}/rag/{doc_id}")
