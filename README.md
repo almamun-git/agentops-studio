@@ -55,7 +55,13 @@ Query documents:
 ```bash
 curl -X POST http://localhost:8000/api/v1/rag/query \
   -H "Content-Type: application/json" \
-  -d '{"user_id":"user-1","query":"mars mission","top_k":3}'
+  -d '{"user_id":"user-1","query":"mars mission","top_k":3,"min_score":0.5}'
+```
+
+Delete a document:
+
+```bash
+curl -X DELETE http://localhost:8000/api/v1/rag/{doc_id}
 ```
 
 ### Adapter configuration
