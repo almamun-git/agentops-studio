@@ -23,6 +23,8 @@
 ### RAG
 - `POST /rag/ingest` ingest documents for retrieval.
 - `POST /rag/query` query documents for a user.
+  - `min_score` (0.0-1.0) filters low-scoring matches.
+- `DELETE /rag/{doc_id}` delete a stored document by id.
 
 ### Eval
 - `POST /eval` trigger an evaluation run.
