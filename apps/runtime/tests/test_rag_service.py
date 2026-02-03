@@ -19,6 +19,7 @@ async def test_rag_service_ingest_and_query():
     )
 
     assert len(documents) == 2
+    assert documents[0].created_at
 
     matches = await service.query("user-1", "apollo mission", top_k=2)
 
