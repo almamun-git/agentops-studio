@@ -37,6 +37,19 @@ class RagIngestRequest(BaseModel):
     user_id: str = Field(..., description="User or tenant identifier.")
     documents: list[RagDocumentIn] = Field(..., description="Documents to ingest.")
 
+    model_config = {
+        "json_schema_extra": {
+            "examples": [
+                {
+                    "user_id": "user-1",
+                    "documents": [
+                        {"text": "Mars mission summary", "metadata": {"source": "notes"}},
+                    ],
+                }
+            ]
+        }
+    }
+
 
 class RagIngestResponse(BaseModel):
     """RAG ingest response."""
@@ -57,6 +70,12 @@ class RagQueryRequest(BaseModel):
         le=1.0,
         description="Minimum relevance score required to return a match.",
     )
+
+    model_config = {
+        "json_schema_extra": {
+            "examples": [{"user_id": "user-1", "query": "mars mission", "top_k": 3}]
+        }
+    }
 
 
 class RagQueryResponse(BaseModel):
