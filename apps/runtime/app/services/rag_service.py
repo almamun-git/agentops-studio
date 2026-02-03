@@ -43,9 +43,11 @@ class RagService:
     """Coordinates RAG ingest and retrieval operations."""
 
     def __init__(self, vector_store: VectorStoreAdapter) -> None:
+        """Initialize RAG service with a vector store backend."""
         self._vector_store = vector_store
 
     async def ingest(self, user_id: str, documents: list[RagDocumentIn]) -> list[RagDocument]:
+        """Ingest documents for a user into the vector store."""
         now = datetime.now(timezone.utc)
         items: list[MemoryItem] = []
         stored: list[RagDocument] = []
@@ -77,6 +79,7 @@ class RagService:
         return stored
 
     async def query(self, user_id: str, query: str, top_k: int, *, min_score: float = 0.0) -> list[RagMatch]:
+        """Query documents for a user, returning top matches by relevance."""
         if top_k <= 0:
             return []
         candidates = await self._vector_store.query(
@@ -112,6 +115,7 @@ class RagService:
         return matches
 
     async def delete(self, doc_id: str) -> None:
+        """Delete a document from the vector store by id."""
         await self._vector_store.delete(doc_id)
 
 
