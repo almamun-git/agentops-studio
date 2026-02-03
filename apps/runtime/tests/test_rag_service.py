@@ -84,3 +84,15 @@ async def test_rag_service_delete_removes_match():
     matches = await service.query("user-4", "ocean", top_k=3)
 
     assert matches == []
+
+
+@pytest.mark.asyncio
+async def test_rag_service_whitespace_only_query_returns_no_matches():
+    store = InMemoryVectorStore()
+    service = RagService(store)
+
+    await service.ingest("user-5", [RagDocumentIn(text="Some content", metadata=None)])
+
+    matches = await service.query("user-5", "   ", top_k=5)
+
+    assert matches == []
