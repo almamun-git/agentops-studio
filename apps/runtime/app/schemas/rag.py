@@ -1,5 +1,7 @@
 """RAG request/response schemas."""
 
+from datetime import datetime
+
 from pydantic import BaseModel, Field
 
 
@@ -25,6 +27,7 @@ class RagMatch(BaseModel):
     text: str
     score: float
     metadata: dict | None = None
+    created_at: datetime
 
 
 class RagIngestRequest(BaseModel):
@@ -47,6 +50,7 @@ class RagQueryRequest(BaseModel):
     user_id: str
     query: str = Field(..., min_length=1)
     top_k: int = Field(default=5, ge=1, le=50)
+    min_score: float = Field(default=0.0, ge=0.0, le=1.0)
 
 
 class RagQueryResponse(BaseModel):
@@ -55,3 +59,10 @@ class RagQueryResponse(BaseModel):
     user_id: str
     query: str
     matches: list[RagMatch]
+
+
+class RagDeleteResponse(BaseModel):
+    """RAG delete response."""
+
+    doc_id: str
+    deleted: bool = True
