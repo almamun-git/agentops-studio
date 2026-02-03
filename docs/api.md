@@ -27,6 +27,7 @@
   - `min_score` (0.0-1.0) filters low-scoring matches.
 - Query matches include document `created_at`.
 - `DELETE /rag/{doc_id}` delete a stored document by id.
+  - Returns 200 with `doc_id` and `deleted: true` on success.
 
 ### Eval
 - `POST /eval` trigger an evaluation run.
