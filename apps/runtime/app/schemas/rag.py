@@ -8,8 +8,8 @@ from pydantic import BaseModel, Field
 class RagDocumentIn(BaseModel):
     """Document payload for ingestion."""
 
-    text: str = Field(..., min_length=1)
-    metadata: dict | None = None
+    text: str = Field(..., min_length=1, description="Document text content.")
+    metadata: dict | None = Field(default=None, description="Optional metadata.")
 
 
 class RagDocument(BaseModel):
@@ -34,8 +34,8 @@ class RagMatch(BaseModel):
 class RagIngestRequest(BaseModel):
     """Ingest documents into the RAG store."""
 
-    user_id: str
-    documents: list[RagDocumentIn]
+    user_id: str = Field(..., description="User or tenant identifier.")
+    documents: list[RagDocumentIn] = Field(..., description="Documents to ingest.")
 
 
 class RagIngestResponse(BaseModel):
@@ -48,7 +48,7 @@ class RagIngestResponse(BaseModel):
 class RagQueryRequest(BaseModel):
     """Query documents from the RAG store."""
 
-    user_id: str
+    user_id: str = Field(..., description="User or tenant identifier.")
     query: str = Field(..., min_length=1, description="Search query text.")
     top_k: int = Field(default=5, ge=1, le=50, description="Max matches to return.")
     min_score: float = Field(
