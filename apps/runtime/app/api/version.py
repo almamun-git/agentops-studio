@@ -6,7 +6,7 @@ from app.schemas.common import VersionResponse
 router = APIRouter()
 
 
-@router.get("/version", response_model=VersionResponse)
+@router.get("/version", response_model=VersionResponse, response_description="API and app version.")
 def get_version() -> VersionResponse:
     """Get API version information."""
     return VersionResponse(
