@@ -38,6 +38,7 @@ from app.api.exceptions import global_exception_handler
 
 app.add_exception_handler(Exception, global_exception_handler)
 
+# API routers
 app.include_router(root_router)
 app.include_router(version_router, prefix=API_V1_PREFIX, tags=["meta"])
 app.include_router(health_router, prefix=API_V1_PREFIX, tags=["health"])
