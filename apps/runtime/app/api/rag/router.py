@@ -37,7 +37,7 @@ async def query_documents(
     return RagQueryResponse(user_id=payload.user_id, query=payload.query, matches=matches)
 
 
-@router.delete("/{doc_id}", response_model=RagDeleteResponse)
+@router.delete("/{doc_id}", response_model=RagDeleteResponse, response_description="Deleted document id and status.")
 async def delete_document(
     doc_id: str,
     rag: RagService = Depends(get_rag_service),
