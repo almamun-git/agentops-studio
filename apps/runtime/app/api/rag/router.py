@@ -22,7 +22,7 @@ async def ingest_documents(
     return RagIngestResponse(user_id=payload.user_id, documents=documents)
 
 
-@router.post("/query", response_model=RagQueryResponse)
+@router.post("/query", response_model=RagQueryResponse, response_description="Top matches with scores and timestamps.")
 async def query_documents(
     payload: RagQueryRequest,
     rag: RagService = Depends(get_rag_service),
