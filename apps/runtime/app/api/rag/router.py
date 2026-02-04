@@ -12,7 +12,7 @@ from app.services.rag_service import RagService, get_rag_service
 router = APIRouter(tags=["RAG"])
 
 
-@router.post("/ingest", response_model=RagIngestResponse)
+@router.post("/ingest", response_model=RagIngestResponse, response_description="Ingested documents with ids and timestamps.")
 async def ingest_documents(
     payload: RagIngestRequest,
     rag: RagService = Depends(get_rag_service),
