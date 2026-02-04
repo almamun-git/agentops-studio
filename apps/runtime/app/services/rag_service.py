@@ -8,11 +8,10 @@ from datetime import datetime, timezone
 
 from app.adapters.factory import get_vector_store
 from app.adapters.interfaces import VectorStoreAdapter
+from app.core.constants import RAG_CANDIDATE_MULTIPLIER
 from app.models.core import MemoryItem
 from app.schemas.rag import RagDocument, RagDocumentIn, RagMatch
 from app.utils.id import generate_memory_id
-
-_CANDIDATE_MULTIPLIER = 3
 
 
 def _tokenize(text: str) -> list[str]:
@@ -85,7 +84,7 @@ class RagService:
         candidates = await self._vector_store.query(
             user_id,
             query,
-            limit=top_k * _CANDIDATE_MULTIPLIER,
+            limit=top_k * RAG_CANDIDATE_MULTIPLIER,
         )
         scored: list[tuple[float, MemoryItem]] = []
 
