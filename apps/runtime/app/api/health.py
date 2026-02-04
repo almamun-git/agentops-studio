@@ -6,7 +6,7 @@ from app.utils.time import format_timestamp, utc_now
 router = APIRouter()
 
 
-@router.get("/health", response_model=StatusResponse)
+@router.get("/health", response_model=StatusResponse, response_description="Service health and timestamp.")
 def health():
     """Health check endpoint."""
     return StatusResponse(
