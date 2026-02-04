@@ -21,6 +21,7 @@
 - `GET /memory/{user_id}` fetch memory items for a user.
 
 ### RAG
+RAG endpoints are grouped under the **RAG** tag in `/docs`.
 - `POST /rag/ingest` ingest documents for retrieval.
   - Responses include document `created_at` timestamps.
 - `POST /rag/query` query documents for a user.
