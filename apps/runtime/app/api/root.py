@@ -7,7 +7,7 @@ from app.schemas.common import RootResponse
 router = APIRouter()
 
 
-@router.get("/", response_model=RootResponse)
+@router.get("/", response_model=RootResponse, response_description="Service name, version, and API base paths.")
 def root() -> RootResponse:
     """Root endpoint with API information."""
     return RootResponse(
