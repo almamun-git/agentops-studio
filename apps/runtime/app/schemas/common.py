@@ -28,8 +28,8 @@ class RootResponse(BaseModel):
 
 class VersionResponse(BaseModel):
     """Version endpoint response schema."""
-    version: str
-    api_version: str
+    version: str = Field(..., description="Application version.")
+    api_version: str = Field(..., description="API contract version.")
 
 
 __all__ = [
