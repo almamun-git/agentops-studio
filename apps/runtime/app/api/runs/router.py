@@ -63,7 +63,7 @@ async def create_run(payload: RunCreate) -> RunDetailResponse:
     return RunDetailResponse(**run.model_dump())
 
 
-@router.get("/", response_model=RunListResponse)
+@router.get("/", response_model=RunListResponse, response_description="List of recent runs.")
 async def list_runs() -> RunListResponse:
     """List recent workflow runs."""
     runs = sorted(
