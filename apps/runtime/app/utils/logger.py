@@ -1,3 +1,5 @@
+"""Application logger configuration."""
+
 import logging
 from app.core.config import settings
 
