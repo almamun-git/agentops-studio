@@ -3,7 +3,7 @@ from fastapi import APIRouter
 router = APIRouter()
 
 
-@router.post("/run")
+@router.post("/run", response_description="Evaluation run status.")
 async def run_eval():
     """Run evaluation suite."""
     return {"message": "Evaluation not implemented yet"}
