@@ -74,7 +74,7 @@ async def list_runs() -> RunListResponse:
     return RunListResponse(runs=[RunResponse(**run.model_dump()) for run in runs])
 
 
-@router.get("/{run_id}", response_model=RunDetailResponse)
+@router.get("/{run_id}", response_model=RunDetailResponse, response_description="Run details and steps.")
 async def get_run(run_id: str) -> RunDetailResponse:
     """Get run details."""
     run = _RUN_STORE.get(run_id)
