@@ -3,7 +3,7 @@ from fastapi import APIRouter
 router = APIRouter()
 
 
-@router.get("/{user_id}")
+@router.get("/{user_id}", response_description="User memory items.")
 async def get_memory(user_id: str):
     """Get user memory."""
     return {"user_id": user_id, "memory": {}}
