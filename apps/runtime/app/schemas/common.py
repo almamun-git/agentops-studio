@@ -2,13 +2,13 @@
 
 from typing import Literal
 
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 class StatusResponse(BaseModel):
     """Status response schema."""
-    status: Literal["ok", "error"]
-    timestamp: str
+    status: Literal["ok", "error"] = Field(..., description="Service status.")
+    timestamp: str = Field(..., description="ISO-8601 UTC timestamp.")
 
 
 class ErrorResponse(BaseModel):
