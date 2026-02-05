@@ -1,6 +1,6 @@
 """Application constants."""
 
-# Run status values
+# Run status values (workflow and step lifecycle)
 RUN_STATUS_PENDING = "pending"
 RUN_STATUS_RUNNING = "running"
 RUN_STATUS_COMPLETED = "completed"
