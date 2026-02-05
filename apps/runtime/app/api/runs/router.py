@@ -11,7 +11,7 @@ router = APIRouter()
 _RUN_STORE: dict[str, Run] = {}
 
 
-@router.post("/", response_model=RunDetailResponse)
+@router.post("/", response_model=RunDetailResponse, response_description="Created run with steps.")
 async def create_run(payload: RunCreate) -> RunDetailResponse:
     """Create a new workflow run."""
     now = datetime.now(timezone.utc)
