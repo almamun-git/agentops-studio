@@ -9,7 +9,7 @@ async def run_eval():
     return {"message": "Evaluation not implemented yet"}
 
 
-@router.get("/{eval_id}")
+@router.get("/{eval_id}", response_description="Evaluation run details.")
 async def get_eval(eval_id: str):
     """Get evaluation results."""
     return {"eval_id": eval_id, "status": "pending"}
