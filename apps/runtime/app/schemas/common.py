@@ -13,7 +13,7 @@ class StatusResponse(BaseModel):
 
 class ErrorResponse(BaseModel):
     """Error response schema."""
-    detail: str
+    detail: str = Field(..., description="Error message.")
     code: str | None = None
 
 
