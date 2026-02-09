@@ -19,11 +19,11 @@ class ErrorResponse(BaseModel):
 
 class RootResponse(BaseModel):
     """Root endpoint response schema."""
-    name: str
-    version: str
-    docs: str
-    api_base: str
-    version_endpoint: str
+    name: str = Field(..., description="Application name.")
+    version: str = Field(..., description="Application version.")
+    docs: str = Field(..., description="Path to API docs.")
+    api_base: str = Field(..., description="API base path.")
+    version_endpoint: str = Field(..., description="Version endpoint path.")
 
 
 class VersionResponse(BaseModel):
