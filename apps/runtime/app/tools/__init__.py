@@ -1,2 +1,1 @@
-# Tool implementations (RAG search, HTTP, DB query, memory, etc.)
-
+"""Tool implementations (RAG, HTTP, DB, memory, etc.)."""
