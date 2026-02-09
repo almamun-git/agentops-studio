@@ -1,1 +1,1 @@
-"""API module."""
+"""API routers and handlers."""
