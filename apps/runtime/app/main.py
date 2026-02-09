@@ -36,6 +36,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Global exception handler
 from app.api.exceptions import global_exception_handler
 
 app.add_exception_handler(Exception, global_exception_handler)
