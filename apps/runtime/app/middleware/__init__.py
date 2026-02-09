@@ -1,2 +1,1 @@
-# Custom middleware
-
+"""Custom middleware (logging, etc.)."""
