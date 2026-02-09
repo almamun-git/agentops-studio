@@ -16,6 +16,7 @@ from app.core.metadata import APP_NAME, APP_VERSION
 from app.utils.logger import logger
 
 
+# Lifespan: startup and shutdown
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Startup and shutdown events."""
