@@ -1,2 +1,1 @@
-# Memory API endpoints (user memory management)
-
+"""Memory API: get and update user memory."""
