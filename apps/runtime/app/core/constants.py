@@ -15,6 +15,6 @@ RAG_DEFAULT_TOP_K = 5
 RAG_MAX_TOP_K = 50
 RAG_CANDIDATE_MULTIPLIER = 3
 
-# API
+# API base and docs paths
 API_V1_PREFIX = "/api/v1"
 DOCS_PATH = "/docs"
