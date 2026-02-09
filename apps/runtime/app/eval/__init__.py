@@ -1,2 +1,1 @@
-# Evaluation harness for agent reliability testing
-
+"""Evaluation harness for agent reliability testing."""
