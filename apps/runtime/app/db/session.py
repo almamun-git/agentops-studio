@@ -1,2 +1,1 @@
-# Database session management (SQLAlchemy async - to be implemented)
-
+"""Database session management (SQLAlchemy async - to be implemented)."""
