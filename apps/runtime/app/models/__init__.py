@@ -14,5 +14,3 @@ __all__ = [
     "ToolCall",
     "ToolCallStatus",
 ]
-# Pydantic models and schemas for API requests/responses
-
