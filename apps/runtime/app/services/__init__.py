@@ -1,2 +1,1 @@
-# Service layer for runtime operations.
-
+"""Service layer for runtime operations."""
