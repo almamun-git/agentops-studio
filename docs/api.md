@@ -1,5 +1,7 @@
 ## Runtime API
 
+All timestamps in responses are ISO-8601 UTC.
+
 ### Root
 - `GET /` returns basic service metadata and API base paths.
   - `api_base` currently defaults to `/api/v1`.
