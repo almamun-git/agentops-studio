@@ -15,4 +15,5 @@ execution, tool usage, memory, and evaluation results.
 - `EvalRun`: Tracks evaluation runs and recorded results/metrics.
 
 The canonical definitions live in `apps/runtime/app/models/core.py` and API
-schemas reuse these types where possible.
+schemas reuse these types where possible. All models use Pydantic `Field` with
+descriptions for OpenAPI documentation.
