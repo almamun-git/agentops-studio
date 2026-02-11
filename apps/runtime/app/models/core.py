@@ -30,17 +30,17 @@ class ToolCall(BaseModel):
 class Step(BaseModel):
     """Single step inside a run."""
 
-    step_id: str
-    run_id: str
-    name: str
-    status: StepStatus = "pending"
-    input: dict | None = None
-    output: dict | None = None
-    tool_calls: list[ToolCall] = Field(default_factory=list)
-    started_at: datetime | None = None
-    finished_at: datetime | None = None
-    error: str | None = None
-    metadata: dict | None = None
+    step_id: str = Field(..., description="Unique step identifier.")
+    run_id: str = Field(..., description="Parent run identifier.")
+    name: str = Field(..., description="Step name.")
+    status: StepStatus = Field(default="pending", description="Step status.")
+    input: dict | None = Field(default=None, description="Step input.")
+    output: dict | None = Field(default=None, description="Step output.")
+    tool_calls: list[ToolCall] = Field(default_factory=list, description="Tool calls made in this step.")
+    started_at: datetime | None = Field(default=None, description="When the step started.")
+    finished_at: datetime | None = Field(default=None, description="When the step finished.")
+    error: str | None = Field(default=None, description="Error message if failed.")
+    metadata: dict | None = Field(default=None, description="Optional metadata.")
 
 
 class Run(BaseModel):
