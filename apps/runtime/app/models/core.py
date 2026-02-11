@@ -61,13 +61,13 @@ class Run(BaseModel):
 class MemoryItem(BaseModel):
     """Stored memory item."""
 
-    memory_id: str
-    user_id: str
-    key: str
-    value: dict
-    metadata: dict | None = None
-    created_at: datetime
-    updated_at: datetime | None = None
+    memory_id: str = Field(..., description="Unique memory item identifier.")
+    user_id: str = Field(..., description="User or tenant identifier.")
+    key: str = Field(..., description="Memory key.")
+    value: dict = Field(..., description="Stored value.")
+    metadata: dict | None = Field(default=None, description="Optional metadata.")
+    created_at: datetime = Field(..., description="When the item was created.")
+    updated_at: datetime | None = Field(default=None, description="When the item was last updated.")
 
 
 class EvalRun(BaseModel):
