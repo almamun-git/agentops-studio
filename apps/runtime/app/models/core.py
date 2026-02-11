@@ -46,16 +46,16 @@ class Step(BaseModel):
 class Run(BaseModel):
     """Top-level workflow run."""
 
-    run_id: str
-    workflow_id: str
-    status: RunStatus = "pending"
-    created_at: datetime
-    started_at: datetime | None = None
-    finished_at: datetime | None = None
-    input: dict
-    output: dict | None = None
-    steps: list[Step] = Field(default_factory=list)
-    metadata: dict | None = None
+    run_id: str = Field(..., description="Unique run identifier.")
+    workflow_id: str = Field(..., description="Workflow identifier.")
+    status: RunStatus = Field(default="pending", description="Run status.")
+    created_at: datetime = Field(..., description="When the run was created.")
+    started_at: datetime | None = Field(default=None, description="When the run started.")
+    finished_at: datetime | None = Field(default=None, description="When the run finished.")
+    input: dict = Field(..., description="Run input payload.")
+    output: dict | None = Field(default=None, description="Run output payload.")
+    steps: list[Step] = Field(default_factory=list, description="Steps in this run.")
+    metadata: dict | None = Field(default=None, description="Optional metadata.")
 
 
 class MemoryItem(BaseModel):
