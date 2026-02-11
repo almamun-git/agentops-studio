@@ -16,15 +16,15 @@ EvalStatus = Literal["pending", "running", "completed", "failed"]
 class ToolCall(BaseModel):
     """Tool call performed during a step."""
 
-    tool_call_id: str
-    tool_name: str
-    input: dict
-    output: dict | None = None
-    status: ToolCallStatus = "pending"
-    started_at: datetime | None = None
-    finished_at: datetime | None = None
-    error: str | None = None
-    metadata: dict | None = None
+    tool_call_id: str = Field(..., description="Unique tool call identifier.")
+    tool_name: str = Field(..., description="Name of the invoked tool.")
+    input: dict = Field(..., description="Tool input payload.")
+    output: dict | None = Field(default=None, description="Tool output payload.")
+    status: ToolCallStatus = Field(default="pending", description="Tool call status.")
+    started_at: datetime | None = Field(default=None, description="When the tool call started.")
+    finished_at: datetime | None = Field(default=None, description="When the tool call finished.")
+    error: str | None = Field(default=None, description="Error message if failed.")
+    metadata: dict | None = Field(default=None, description="Optional metadata.")
 
 
 class Step(BaseModel):
