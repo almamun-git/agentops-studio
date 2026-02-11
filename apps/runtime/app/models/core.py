@@ -8,9 +8,16 @@ from typing import Literal
 from pydantic import BaseModel, Field
 
 RunStatus = Literal["pending", "running", "completed", "failed"]
+"""Workflow run status values."""
+
 StepStatus = Literal["pending", "running", "completed", "failed"]
+"""Step execution status values."""
+
 ToolCallStatus = Literal["pending", "running", "completed", "failed"]
+"""Tool call status values."""
+
 EvalStatus = Literal["pending", "running", "completed", "failed"]
+"""Evaluation run status values."""
 
 
 class ToolCall(BaseModel):
