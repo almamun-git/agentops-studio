@@ -73,12 +73,12 @@ class MemoryItem(BaseModel):
 class EvalRun(BaseModel):
     """Evaluation run for a workflow or agent."""
 
-    eval_id: str
-    run_id: str | None = None
-    status: EvalStatus = "pending"
-    created_at: datetime
-    started_at: datetime | None = None
-    finished_at: datetime | None = None
-    results: dict | None = None
-    metrics: dict | None = None
-    metadata: dict | None = None
+    eval_id: str = Field(..., description="Unique evaluation run identifier.")
+    run_id: str | None = Field(default=None, description="Associated workflow run id.")
+    status: EvalStatus = Field(default="pending", description="Evaluation status.")
+    created_at: datetime = Field(..., description="When the eval was created.")
+    started_at: datetime | None = Field(default=None, description="When the eval started.")
+    finished_at: datetime | None = Field(default=None, description="When the eval finished.")
+    results: dict | None = Field(default=None, description="Evaluation results.")
+    metrics: dict | None = Field(default=None, description="Evaluation metrics.")
+    metadata: dict | None = Field(default=None, description="Optional metadata.")
