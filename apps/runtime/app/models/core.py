@@ -1,4 +1,4 @@
-"""Core domain data models."""
+"""Core domain data models for workflow runs, steps, tool calls, memory, and evals."""
 
 from __future__ import annotations
 
