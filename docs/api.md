@@ -33,5 +33,6 @@ RAG endpoints are grouped under the **RAG** tag in `/docs`.
   - Returns 200 with `doc_id` and `deleted: true` on success.
 
 ### Eval
-- `POST /eval` trigger an evaluation run.
+- `POST /eval/run` create and run an evaluation (body: optional `run_id`, `suite`). Returns the completed eval run with stub results/metrics.
+- `GET /eval/{eval_id}` get an evaluation run by id. Returns 404 if not found.
 
