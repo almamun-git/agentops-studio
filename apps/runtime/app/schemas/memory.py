@@ -28,3 +28,9 @@ class MemoryUpsertResponse(BaseModel):
     user_id: str
     items: list[MemoryItem]
 
+
+class MemoryDeleteResponse(BaseModel):
+    """Response schema for memory delete."""
+    memory_id: str
+    deleted: bool = True
+
