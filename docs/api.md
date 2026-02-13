@@ -20,7 +20,9 @@ All timestamps in responses are ISO-8601 UTC.
 - `GET /runs/{run_id}` fetch a run.
 
 ### Memory
-- `GET /memory/{user_id}` fetch memory items for a user.
+- `GET /memory/{user_id}` fetch memory items for a user (excludes RAG documents).
+- `PUT /memory/{user_id}` upsert memory items (body: `items` list with `key`, `value`, optional `metadata`).
+- `DELETE /memory/{user_id}/{memory_id}` delete a memory item by id.
 
 ### RAG
 RAG endpoints are grouped under the **RAG** tag in `/docs`.
