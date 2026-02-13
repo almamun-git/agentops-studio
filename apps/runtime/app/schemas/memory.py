@@ -22,3 +22,9 @@ class MemoryResponse(BaseModel):
     user_id: str
     items: list[MemoryItem]
 
+
+class MemoryUpsertResponse(BaseModel):
+    """Response schema for memory upsert."""
+    user_id: str
+    items: list[MemoryItem]
+
