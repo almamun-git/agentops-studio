@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends
 
-from app.schemas.memory import MemoryResponse
+from app.schemas.memory import MemoryResponse, MemoryUpsertRequest, MemoryUpsertResponse
 from app.services.memory_service import MemoryService, get_memory_service
 
 router = APIRouter()
@@ -16,8 +16,13 @@ async def get_memory(
     return MemoryResponse(user_id=user_id, items=items)
 
 
-@router.put("/{user_id}", response_description="Updated memory status.")
-async def update_memory(user_id: str):
-    """Update user memory."""
-    return {"user_id": user_id, "status": "updated"}
+@router.put("/{user_id}", response_model=MemoryUpsertResponse, response_description="Upserted memory items.")
+async def upsert_memory(
+    user_id: str,
+    payload: MemoryUpsertRequest,
+    memory_svc: MemoryService = Depends(get_memory_service),
+) -> MemoryUpsertResponse:
+    """Upsert memory items for a user."""
+    items = await memory_svc.upsert(user_id, payload.items)
+    return MemoryUpsertResponse(user_id=user_id, items=items)
 
