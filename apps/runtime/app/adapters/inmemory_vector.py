@@ -19,6 +19,10 @@ class InMemoryVectorStore:
         for item in items:
             self._items.setdefault(item.user_id, {})[item.memory_id] = item
 
+    async def list(self, user_id: str) -> list[MemoryItem]:
+        """List all memory items for a user."""
+        return list(self._items.get(user_id, {}).values())
+
     async def query(self, user_id: str, query: str, *, limit: int = 10) -> list[MemoryItem]:
         """Return items whose key or value contain any query token."""
         tokens = re.findall(r"[a-z0-9]+", query.lower())
