@@ -48,6 +48,9 @@ class VectorStoreAdapter(Protocol):
     async def upsert(self, items: list[MemoryItem]) -> None:
         """Upsert memory items."""
 
+    async def list(self, user_id: str) -> list[MemoryItem]:
+        """List all memory items for a user."""
+
     async def query(self, user_id: str, query: str, *, limit: int = 10) -> list[MemoryItem]:
         """Query memory items for a user."""
 
