@@ -36,7 +36,7 @@ class MemoryService:
                 user_id=user_id,
                 key=item_in.key,
                 value=item_in.value,
-                metadata={"kind": MEMORY_KIND} | (item_in.metadata or {}),
+                metadata=(item_in.metadata or {}) | {"kind": MEMORY_KIND},
                 created_at=now,
             )
             memory_items.append(item)
