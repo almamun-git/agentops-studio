@@ -22,7 +22,13 @@ def _redis_run_store_factory() -> "RunStoreAdapter":
     return RedisRunStore()
 
 
+def _postgres_run_store_factory() -> "RunStoreAdapter":
+    from app.adapters.postgres_run_store import PostgresRunStore
+    return PostgresRunStore()
+
+
 _registry.register("run_store", "redis", _redis_run_store_factory)
+_registry.register("run_store", "postgres", _postgres_run_store_factory)
 _registry.register("orchestrator", "inmemory", InMemoryOrchestrator)
 _registry.register("llm", "echo", EchoLLMAdapter)
 _registry.register("vector_store", "inmemory", InMemoryVectorStore)
