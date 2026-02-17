@@ -67,7 +67,11 @@ curl -X DELETE http://localhost:8000/api/v1/rag/{doc_id}
 ### Adapter configuration
 
 The runtime defaults to local in-memory adapters. Override via env vars:
-`ORCHESTRATOR_ADAPTER`, `LLM_ADAPTER`, `VECTOR_STORE_ADAPTER`, `TELEMETRY_ADAPTER`.
+`RUN_STORE_ADAPTER`, `ORCHESTRATOR_ADAPTER`, `LLM_ADAPTER`, `VECTOR_STORE_ADAPTER`, `TELEMETRY_ADAPTER`.
+
+Run store options: `inmemory` (default), `redis`, `postgres`.
+- Redis: `RUN_STORE_ADAPTER=redis`, requires `pip install -e '.[redis]'` and Redis running.
+- Postgres: `RUN_STORE_ADAPTER=postgres`, requires `pip install -e '.[postgres]'` and Postgres running.
 
 ### API Documentation
 
