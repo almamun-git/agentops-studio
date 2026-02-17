@@ -92,8 +92,8 @@ See [docs/push.md](docs/push.md) for pushing to GitHub.
 
 ### Next steps
 
-- Define core data model: Run, Step, ToolCall, MemoryItem, EvalRun
-- Add adapter interfaces: OrchestratorAdapter, LLMAdapter, VectorStoreAdapter, TelemetryAdapter
 - Implement first concrete stack: FastAPI + (LangGraph) + Postgres + Redis + OpenTelemetry
+- Add Web UI: runs list/detail, RAG ingest/query, eval dashboard
+- Add guardrails: safety policies and output validation
 
 
