@@ -16,7 +16,14 @@ from app.core.config import settings
 
 _registry = AdapterRegistry()
 _registry.register("run_store", "inmemory", InMemoryRunStore)
-_registry.register("run_store", "redis", lambda: RedisRunStore())
+
+
+def _redis_run_store_factory() -> "RunStoreAdapter":
+    from app.adapters.redis_run_store import RedisRunStore
+    return RedisRunStore()
+
+
+_registry.register("run_store", "redis", _redis_run_store_factory)
 _registry.register("orchestrator", "inmemory", InMemoryOrchestrator)
 _registry.register("llm", "echo", EchoLLMAdapter)
 _registry.register("vector_store", "inmemory", InMemoryVectorStore)
