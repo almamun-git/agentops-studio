@@ -25,6 +25,9 @@ class DummyVectorStore:
     async def upsert(self, items: list[MemoryItem]) -> None:
         return None
 
+    async def list(self, user_id: str) -> list[MemoryItem]:
+        return []
+
     async def query(self, user_id: str, query: str, *, limit: int = 10) -> list[MemoryItem]:
         return []
 
