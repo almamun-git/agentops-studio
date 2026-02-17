@@ -2,21 +2,19 @@
 
 from __future__ import annotations
 
-from datetime import datetime, timezone
-
+from app.adapters.interfaces import RunStoreAdapter
 from app.models.core import Run
 
 
 class RunService:
-    """In-memory run store."""
+    """Run service backed by a RunStore adapter."""
 
-    def __init__(self) -> None:
-        self._store: dict[str, Run] = {}
+    def __init__(self, store: RunStoreAdapter) -> None:
+        self._store = store
 
     def create(self, run: Run) -> Run:
         """Store a run."""
-        self._store[run.run_id] = run
-        return run
+        return self._store.create(run)
 
     def get(self, run_id: str) -> Run | None:
         """Get a run by id."""
@@ -24,11 +22,7 @@ class RunService:
 
     def list_runs(self) -> list[Run]:
         """List runs sorted by created_at descending."""
-        return sorted(
-            self._store.values(),
-            key=lambda r: r.created_at,
-            reverse=True,
-        )
+        return self._store.list_runs()
 
 
 _run_service: RunService | None = None
@@ -38,5 +32,6 @@ def get_run_service() -> RunService:
     """FastAPI dependency for the run service."""
     global _run_service
     if _run_service is None:
-        _run_service = RunService()
+        from app.adapters.factory import get_run_store
+        _run_service = RunService(get_run_store())
     return _run_service

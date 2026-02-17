@@ -9,10 +9,12 @@ from app.adapters import (
     InMemoryTelemetry,
     InMemoryVectorStore,
 )
-from app.adapters.interfaces import VectorStoreAdapter
+from app.adapters.inmemory_run_store import InMemoryRunStore
+from app.adapters.interfaces import RunStoreAdapter, VectorStoreAdapter
 from app.core.config import settings
 
 _registry = AdapterRegistry()
+_registry.register("run_store", "inmemory", InMemoryRunStore)
 _registry.register("orchestrator", "inmemory", InMemoryOrchestrator)
 _registry.register("llm", "echo", EchoLLMAdapter)
 _registry.register("vector_store", "inmemory", InMemoryVectorStore)
@@ -26,6 +28,11 @@ def _get_cached(adapter_type: str, name: str) -> object:
     if cache_key not in _cache:
         _cache[cache_key] = _registry.get(adapter_type, name)
     return _cache[cache_key]
+
+
+def get_run_store() -> RunStoreAdapter:
+    """Return the configured run store adapter."""
+    return _get_cached("run_store", settings.run_store_adapter)
 
 
 def get_vector_store() -> VectorStoreAdapter:
