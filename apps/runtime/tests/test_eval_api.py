@@ -2,7 +2,7 @@ from app.core.constants import API_V1_PREFIX
 
 
 def test_eval_run_creates_and_returns_completed(client):
-    """POST /eval/run creates an eval and runs it (placeholder), returns completed."""
+    """POST /eval/run creates an eval and runs it, returns completed."""
     payload = {"run_id": "run_abc123", "suite": "smoke"}
     response = client.post(f"{API_V1_PREFIX}/eval/run", json=payload)
     assert response.status_code == 200
@@ -13,8 +13,25 @@ def test_eval_run_creates_and_returns_completed(client):
     assert "created_at" in data
     assert data.get("started_at")
     assert data.get("finished_at")
-    assert data.get("results") == {"passed": 0, "failed": 0, "skipped": 0}
+    assert data.get("results")["failed"] == 1
     assert "metrics" in data
+
+
+def test_eval_run_passes_when_run_exists(client):
+    """POST /eval/run with valid run_id returns passed when run exists and is completed."""
+    run_resp = client.post(
+        f"{API_V1_PREFIX}/runs",
+        json={"workflow_id": "wf1", "input": {"text": "test"}},
+    )
+    assert run_resp.status_code == 200
+    run_id = run_resp.json()["run_id"]
+    eval_resp = client.post(
+        f"{API_V1_PREFIX}/eval/run",
+        json={"run_id": run_id},
+    )
+    assert eval_resp.status_code == 200
+    assert eval_resp.json()["results"]["passed"] == 1
+    assert eval_resp.json()["results"]["failed"] == 0
 
 
 def test_eval_get_returns_run(client):
