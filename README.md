@@ -78,6 +78,7 @@ Run store options: `inmemory` (default), `redis`, `postgres`.
 See [docs/api.md](docs/api.md) for API endpoint documentation.
 See [docs/data-model.md](docs/data-model.md) for core domain model definitions.
 See [docs/adapters.md](docs/adapters.md) for adapter interfaces.
+See [docs/push.md](docs/push.md) for pushing to GitHub.
 
 ### Project Status
 
