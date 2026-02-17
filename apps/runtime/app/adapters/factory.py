@@ -10,7 +10,6 @@ from app.adapters import (
     InMemoryVectorStore,
 )
 from app.adapters.inmemory_run_store import InMemoryRunStore
-from app.adapters.redis_run_store import RedisRunStore
 from app.adapters.interfaces import RunStoreAdapter, VectorStoreAdapter
 from app.core.config import settings
 
