@@ -1,18 +1,20 @@
 from datetime import datetime, timezone
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 
 from app.models.core import Run, Step, ToolCall
 from app.schemas.run import RunCreate, RunDetailResponse, RunListResponse, RunResponse
+from app.services.run_service import RunService, get_run_service
 from app.utils.id import generate_run_id, generate_step_id
 
 router = APIRouter()
 
-_RUN_STORE: dict[str, Run] = {}
-
 
 @router.post("/", response_model=RunDetailResponse, response_description="Created run with steps.")
-async def create_run(payload: RunCreate) -> RunDetailResponse:
+async def create_run(
+    payload: RunCreate,
+    run_svc: RunService = Depends(get_run_service),
+) -> RunDetailResponse:
     """Create a new workflow run."""
     now = datetime.now(timezone.utc)
     run_id = generate_run_id()
@@ -58,26 +60,27 @@ async def create_run(payload: RunCreate) -> RunDetailResponse:
         output={"summary": tool_call.output["summary"]},
         steps=[step_ingest, step_summarize],
     )
-    _RUN_STORE[run_id] = run
+    run_svc.create(run)
 
     return RunDetailResponse(**run.model_dump())
 
 
 @router.get("/", response_model=RunListResponse, response_description="List of recent runs.")
-async def list_runs() -> RunListResponse:
+async def list_runs(
+    run_svc: RunService = Depends(get_run_service),
+) -> RunListResponse:
     """List recent workflow runs."""
-    runs = sorted(
-        _RUN_STORE.values(),
-        key=lambda item: item.created_at,
-        reverse=True,
-    )
+    runs = run_svc.list_runs()
     return RunListResponse(runs=[RunResponse(**run.model_dump()) for run in runs])
 
 
 @router.get("/{run_id}", response_model=RunDetailResponse, response_description="Run details and steps.")
-async def get_run(run_id: str) -> RunDetailResponse:
+async def get_run(
+    run_id: str,
+    run_svc: RunService = Depends(get_run_service),
+) -> RunDetailResponse:
     """Get run details."""
-    run = _RUN_STORE.get(run_id)
+    run = run_svc.get(run_id)
     if not run:
         return RunDetailResponse(
             run_id=run_id,
