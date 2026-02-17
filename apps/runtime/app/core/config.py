@@ -23,6 +23,7 @@ class Settings(BaseSettings):
     log_level: str = "INFO"
 
     # Adapters (defaults target local/in-memory implementations)
+    run_store_adapter: str = "inmemory"
     orchestrator_adapter: str = "inmemory"
     llm_adapter: str = "echo"
     vector_store_adapter: str = "inmemory"
