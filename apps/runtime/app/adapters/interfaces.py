@@ -7,6 +7,20 @@ from typing import Protocol, runtime_checkable
 from app.models.core import MemoryItem, Run, Step, ToolCall
 
 
+@runtime_checkable
+class RunStoreAdapter(Protocol):
+    """Interface for run storage backends."""
+
+    def create(self, run: Run) -> Run:
+        """Store a run."""
+
+    def get(self, run_id: str) -> Run | None:
+        """Get a run by id."""
+
+    def list_runs(self) -> list[Run]:
+        """List runs (e.g. sorted by created_at desc)."""
+
+
 class AdapterError(RuntimeError):
     """Raised when adapter operations fail."""
 
