@@ -1,4 +1,4 @@
-from datetime import datetime, timezone
+from datetime import datetime
 
 import pytest
 
@@ -14,7 +14,7 @@ async def test_inmemory_vector_store_upsert_query_delete():
         user_id="user-1",
         key="profile",
         value={"name": "Ada"},
-        created_at=datetime.now(timezone.utc),
+        created_at=datetime.now(datetime.UTC),
     )
 
     await store.upsert([item])
