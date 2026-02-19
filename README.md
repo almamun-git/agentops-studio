@@ -88,7 +88,7 @@ See [docs/push.md](docs/push.md) for pushing to GitHub.
 
 - GitHub Actions workflows:
   - `ci.yml` – runs tests for the runtime service
-  - `lint.yml` – placeholder for future linting (ruff/flake8)
+  - `lint.yml` – runs ruff on `app` and `tests`
 
 ### Next steps
 
