@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from app.adapters import LLMAdapter, OrchestratorAdapter, TelemetryAdapter, VectorStoreAdapter
 from app.models.core import MemoryItem, Run, Step, ToolCall
 
