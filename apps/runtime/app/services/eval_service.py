@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import datetime
 
 from app.models.core import EvalRun
 from app.schemas.eval import EvalRunCreate
@@ -33,7 +33,7 @@ class EvalService:
 
     def create(self, payload: EvalRunCreate) -> EvalRun:
         """Create a new evaluation run (pending)."""
-        now = datetime.now(timezone.utc)
+        now = datetime.now(datetime.UTC)
         eval_id = generate_eval_id()
         eval_run = EvalRun(
             eval_id=eval_id,
@@ -54,7 +54,7 @@ class EvalService:
         eval_run = self._store.get(eval_id)
         if not eval_run or eval_run.status != "pending":
             return eval_run
-        now = datetime.now(timezone.utc)
+        now = datetime.now(datetime.UTC)
         updated = eval_run.model_copy(update={
             "status": "running",
             "started_at": now,
