@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import datetime
 
 from app.adapters.factory import get_vector_store
 from app.adapters.interfaces import VectorStoreAdapter
@@ -27,7 +27,7 @@ class MemoryService:
 
     async def upsert(self, user_id: str, items: list[MemoryItemIn]) -> list[MemoryItem]:
         """Upsert memory items for a user."""
-        now = datetime.now(timezone.utc)
+        now = datetime.now(datetime.UTC)
         memory_items: list[MemoryItem] = []
         for item_in in items:
             memory_id = generate_memory_id()
