@@ -1,4 +1,4 @@
-from datetime import datetime, timezone
+from datetime import datetime
 
 import pytest
 
@@ -12,7 +12,7 @@ async def test_inmemory_orchestrator_stores_runs_and_steps():
     run = Run(
         run_id="run-1",
         workflow_id="wf-1",
-        created_at=datetime.now(timezone.utc),
+        created_at=datetime.now(datetime.UTC),
         input={},
     )
 
