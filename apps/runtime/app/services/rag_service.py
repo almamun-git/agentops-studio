@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import json
 import re
-from datetime import datetime, timezone
+from datetime import datetime
 
 from app.adapters.factory import get_vector_store
 from app.adapters.interfaces import VectorStoreAdapter
@@ -47,7 +47,7 @@ class RagService:
 
     async def ingest(self, user_id: str, documents: list[RagDocumentIn]) -> list[RagDocument]:
         """Ingest documents for a user into the vector store."""
-        now = datetime.now(timezone.utc)
+        now = datetime.now(datetime.UTC)
         items: list[MemoryItem] = []
         stored: list[RagDocument] = []
 
