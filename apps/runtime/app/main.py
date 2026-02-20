@@ -25,6 +25,7 @@ async def lifespan(app: FastAPI):
     logger.info("Shutting down AgentOps Runtime...")
 
 
+# FastAPI app
 app = FastAPI(title=APP_NAME, version=APP_VERSION, lifespan=lifespan)
 
 # CORS
