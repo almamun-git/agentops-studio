@@ -1,4 +1,4 @@
-# API request/response schemas
+"""API request/response schemas."""
 
 from app.schemas.common import ErrorResponse, RootResponse, StatusResponse, VersionResponse
 from app.schemas.eval import EvalRunResponse
