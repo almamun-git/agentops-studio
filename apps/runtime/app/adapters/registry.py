@@ -6,6 +6,7 @@ from collections import defaultdict
 from typing import Callable
 
 AdapterFactory = Callable[[], object]
+"""Type alias for adapter factory: no-arg callable returning an adapter instance."""
 
 
 class AdapterRegistry:
