@@ -1,6 +1,7 @@
 """Application logger configuration."""
 
 import logging
+
 from app.core.config import settings
 
 logger = logging.getLogger("agentops")
