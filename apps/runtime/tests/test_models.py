@@ -1,10 +1,10 @@
-from datetime import datetime, timezone
+from datetime import datetime
 
 from app.models.core import EvalRun, MemoryItem, Run, Step
 
 
 def test_run_defaults():
-    now = datetime.now(timezone.utc)
+    now = datetime.now(datetime.UTC)
     run = Run(run_id="run-1", workflow_id="wf-1", created_at=now, input={})
 
     assert run.status == "pending"
@@ -22,7 +22,7 @@ def test_step_tool_calls_default_isolated():
 
 
 def test_memory_item_fields():
-    now = datetime.now(timezone.utc)
+    now = datetime.now(datetime.UTC)
     item = MemoryItem(
         memory_id="mem-1",
         user_id="user-1",
@@ -36,7 +36,7 @@ def test_memory_item_fields():
 
 
 def test_eval_run_defaults():
-    now = datetime.now(timezone.utc)
+    now = datetime.now(datetime.UTC)
     eval_run = EvalRun(eval_id="eval-1", created_at=now)
 
     assert eval_run.status == "pending"

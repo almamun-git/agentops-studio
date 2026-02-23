@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import re
+
 from app.adapters.factory import get_vector_store
 from app.adapters.interfaces import VectorStoreAdapter
 from app.core.constants import RAG_CANDIDATE_MULTIPLIER
