@@ -1,11 +1,11 @@
 """Time utilities."""
 
-from datetime import datetime
+from datetime import datetime, timezone
 
 
 def utc_now() -> datetime:
     """Get current UTC datetime."""
-    return datetime.now(datetime.UTC)
+    return datetime.now(timezone.utc)
 
 
 def format_timestamp(dt: datetime) -> str:
