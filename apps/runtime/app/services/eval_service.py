@@ -8,6 +8,7 @@ from app.models.core import EvalRun
 from app.schemas.eval import EvalRunCreate
 from app.services.run_service import RunService
 from app.utils.id import generate_eval_id
+from app.utils.time import utc_now
 
 
 def _evaluate_run(run, started_at: datetime, finished_at: datetime) -> tuple[int, int, int, float]:
@@ -33,7 +34,7 @@ class EvalService:
 
     def create(self, payload: EvalRunCreate) -> EvalRun:
         """Create a new evaluation run (pending)."""
-        now = datetime.now(datetime.UTC)
+        now = utc_now()
         eval_id = generate_eval_id()
         eval_run = EvalRun(
             eval_id=eval_id,
@@ -54,7 +55,7 @@ class EvalService:
         eval_run = self._store.get(eval_id)
         if not eval_run or eval_run.status != "pending":
             return eval_run
-        now = datetime.now(datetime.UTC)
+        now = utc_now()
         updated = eval_run.model_copy(update={
             "status": "running",
             "started_at": now,

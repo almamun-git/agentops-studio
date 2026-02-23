@@ -4,14 +4,13 @@ from __future__ import annotations
 
 import json
 import re
-from datetime import datetime
-
 from app.adapters.factory import get_vector_store
 from app.adapters.interfaces import VectorStoreAdapter
 from app.core.constants import RAG_CANDIDATE_MULTIPLIER
 from app.models.core import MemoryItem
 from app.schemas.rag import RagDocument, RagDocumentIn, RagMatch
 from app.utils.id import generate_memory_id
+from app.utils.time import utc_now
 
 
 def _tokenize(text: str) -> list[str]:
@@ -47,7 +46,7 @@ class RagService:
 
     async def ingest(self, user_id: str, documents: list[RagDocumentIn]) -> list[RagDocument]:
         """Ingest documents for a user into the vector store."""
-        now = datetime.now(datetime.UTC)
+        now = utc_now()
         items: list[MemoryItem] = []
         stored: list[RagDocument] = []
 

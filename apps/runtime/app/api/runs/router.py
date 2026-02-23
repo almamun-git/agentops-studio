@@ -1,11 +1,10 @@
-from datetime import datetime
-
 from fastapi import APIRouter, Depends
 
 from app.models.core import Run, Step, ToolCall
 from app.schemas.run import RunCreate, RunDetailResponse, RunListResponse, RunResponse
 from app.services.run_service import RunService, get_run_service
 from app.utils.id import generate_run_id, generate_step_id
+from app.utils.time import utc_now
 
 router = APIRouter()
 
@@ -16,7 +15,7 @@ async def create_run(
     run_svc: RunService = Depends(get_run_service),
 ) -> RunDetailResponse:
     """Create a new workflow run."""
-    now = datetime.now(datetime.UTC)
+    now = utc_now()
     run_id = generate_run_id()
     step_ingest = Step(
         step_id=generate_step_id(),
@@ -86,7 +85,7 @@ async def get_run(
             run_id=run_id,
             workflow_id="unknown",
             status="pending",
-            created_at=datetime.now(datetime.UTC),
+            created_at=utc_now(),
             steps=[],
         )
     return RunDetailResponse(**run.model_dump())
