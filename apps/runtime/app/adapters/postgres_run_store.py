@@ -18,7 +18,7 @@ class PostgresRunStore:
         self._database_url = database_url or settings.database_url
         self._conn: psycopg.Connection | None = None
 
-    def _get_conn(self) -> "psycopg.Connection":
+    def _get_conn(self) -> "psycopg.Connection":  # noqa: F821, UP037
         import psycopg
         if self._conn is None or self._conn.closed:
             self._conn = psycopg.connect(self._database_url)

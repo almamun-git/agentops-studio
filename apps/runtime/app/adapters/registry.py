@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from collections import defaultdict
-from typing import Callable
+from collections.abc import Callable
 
 AdapterFactory = Callable[[], object]
 """Type alias for adapter factory: no-arg callable returning an adapter instance."""

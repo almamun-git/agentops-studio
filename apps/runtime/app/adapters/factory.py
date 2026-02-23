@@ -17,12 +17,12 @@ _registry = AdapterRegistry()
 _registry.register("run_store", "inmemory", InMemoryRunStore)
 
 
-def _redis_run_store_factory() -> "RunStoreAdapter":
+def _redis_run_store_factory() -> RunStoreAdapter:
     from app.adapters.redis_run_store import RedisRunStore
     return RedisRunStore()
 
 
-def _postgres_run_store_factory() -> "RunStoreAdapter":
+def _postgres_run_store_factory() -> RunStoreAdapter:
     from app.adapters.postgres_run_store import PostgresRunStore
     return PostgresRunStore()
 
