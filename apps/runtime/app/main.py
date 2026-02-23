@@ -4,14 +4,15 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.api.eval.router import router as eval_router
+from app.api.exceptions import global_exception_handler
 from app.api.health import router as health_router
 from app.api.memory.router import router as memory_router
 from app.api.rag.router import router as rag_router
 from app.api.root import router as root_router
 from app.api.runs.router import router as runs_router
 from app.api.version import router as version_router
-from app.core.constants import API_V1_PREFIX
 from app.core.config import settings
+from app.core.constants import API_V1_PREFIX
 from app.core.metadata import APP_NAME, APP_VERSION
 from app.utils.logger import logger
 
@@ -38,8 +39,6 @@ app.add_middleware(
 )
 
 # Global exception handler
-from app.api.exceptions import global_exception_handler
-
 app.add_exception_handler(Exception, global_exception_handler)
 
 # API routers
