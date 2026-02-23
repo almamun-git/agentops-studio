@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timezone
 
 from app.adapters.inmemory_telemetry import InMemoryTelemetry
 from app.models.core import Run, Step, ToolCall
@@ -9,7 +9,7 @@ def test_inmemory_telemetry_records_events():
     run = Run(
         run_id="run-1",
         workflow_id="wf-1",
-        created_at=datetime.now(datetime.UTC),
+        created_at=datetime.now(timezone.utc),
         input={},
     )
     step = Step(step_id="step-1", run_id="run-1", name="step")
