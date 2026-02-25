@@ -56,7 +56,7 @@ async def create_run(
         started_at=now,
         finished_at=now,
         input=payload.input,
-        output={"summary": tool_call.output["summary"]},
+        output={"summary": tool_call.output.get("summary", "")},
         steps=[step_ingest, step_summarize],
     )
     run_svc.create(run)
