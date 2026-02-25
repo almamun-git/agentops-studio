@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 
 from app.models.core import Run, Step, ToolCall
 from app.schemas.run import RunCreate, RunDetailResponse, RunListResponse, RunResponse
@@ -81,12 +81,6 @@ async def get_run(
     """Get run details."""
     run = run_svc.get(run_id)
     if not run:
-        return RunDetailResponse(
-            run_id=run_id,
-            workflow_id="unknown",
-            status="pending",
-            created_at=utc_now(),
-            steps=[],
-        )
+        raise HTTPException(status_code=404, detail="Run not found")
     return RunDetailResponse(**run.model_dump())
 
