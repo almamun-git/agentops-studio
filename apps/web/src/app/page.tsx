@@ -25,6 +25,12 @@ export default function Home() {
           <div className="flex items-center gap-3 text-xs text-slate-300">
             <a
               className="rounded-full border border-slate-700 px-3 py-1 hover:border-emerald-400 hover:text-emerald-300"
+              href="/"
+            >
+              Home
+            </a>
+            <a
+              className="rounded-full border border-slate-700 px-3 py-1 hover:border-emerald-400 hover:text-emerald-300"
               href="/runs"
             >
               Runs
