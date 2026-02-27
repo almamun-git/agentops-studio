@@ -68,6 +68,12 @@ export default function RunDetailPage({
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100">
       <div className="mx-auto max-w-5xl px-6 py-10">
+        <a
+          href="/runs"
+          className="mb-4 inline-block text-sm text-slate-400 hover:text-emerald-300"
+        >
+          ← Back to runs
+        </a>
         <div className="rounded-2xl border border-slate-800 bg-slate-900/40 p-6">
           <div className="flex items-center justify-between">
             <h1 className="text-2xl font-semibold">Run detail</h1>
