@@ -13,36 +13,7 @@ export default function Home() {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100">
-      <header className="border-b border-slate-800">
-        <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-6">
-          <div>
-            <p className="text-sm uppercase tracking-[0.2em] text-slate-400">
-              AgentOps Studio
-            </p>
-            <h1 className="text-2xl font-semibold">Runtime Console</h1>
-          </div>
-          <div className="flex items-center gap-3 text-xs text-slate-300">
-            <a
-              className="rounded-full border border-slate-700 px-3 py-1 hover:border-emerald-400 hover:text-emerald-300"
-              href="/"
-            >
-              Home
-            </a>
-            <a
-              className="rounded-full border border-slate-700 px-3 py-1 hover:border-emerald-400 hover:text-emerald-300"
-              href="/runs"
-            >
-              Runs
-            </a>
-            <span className="rounded-full border border-slate-700 px-3 py-1">
-              Early Preview
-            </span>
-          </div>
-        </div>
-      </header>
-
-      <main className="mx-auto grid max-w-5xl gap-6 px-6 py-10 lg:grid-cols-[1.2fr_0.8fr]">
+    <main className="mx-auto grid max-w-5xl gap-6 px-6 py-10 lg:grid-cols-[1.2fr_0.8fr]">
         <section className="space-y-6">
           <div className="rounded-2xl border border-slate-800 bg-slate-900/40 p-6">
             <h2 className="text-lg font-semibold">Runtime API</h2>
@@ -61,27 +32,46 @@ export default function Home() {
           <div className="rounded-2xl border border-slate-800 bg-slate-900/40 p-6">
             <h2 className="text-lg font-semibold">Core endpoints</h2>
             <ul className="mt-4 space-y-3">
-              {endpoints.map((endpoint) => (
-                <li
-                  key={endpoint.path}
-                  className="flex items-center justify-between rounded-xl border border-slate-800 bg-slate-950 px-4 py-3"
-                >
-                  <div>
-                    <p className="text-sm font-medium">{endpoint.name}</p>
-                    <p className="text-xs text-slate-400">
-                      {endpoint.description}
-                    </p>
-                  </div>
-                  <a
-                    className="text-xs font-mono text-slate-200 hover:text-emerald-300"
-                    href={`${runtimeBase}${endpoint.path}`}
-                    target="_blank"
-                    rel="noreferrer"
+              {endpoints.map((endpoint) => {
+                const internalPath =
+                  endpoint.path === "/runs"
+                    ? "/runs"
+                    : endpoint.path === "/memory"
+                      ? "/memory"
+                      : endpoint.path === "/eval"
+                        ? "/eval"
+                        : null;
+                return (
+                  <li
+                    key={endpoint.path}
+                    className="flex items-center justify-between rounded-xl border border-slate-800 bg-slate-950 px-4 py-3"
                   >
-                    {endpoint.path}
-                  </a>
-                </li>
-              ))}
+                    <div>
+                      <p className="text-sm font-medium">{endpoint.name}</p>
+                      <p className="text-xs text-slate-400">
+                        {endpoint.description}
+                      </p>
+                    </div>
+                    {internalPath ? (
+                      <a
+                        className="text-xs font-mono text-slate-200 hover:text-emerald-300"
+                        href={internalPath}
+                      >
+                        {endpoint.path}
+                      </a>
+                    ) : (
+                      <a
+                        className="text-xs font-mono text-slate-200 hover:text-emerald-300"
+                        href={`${runtimeBase}${endpoint.path}`}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        {endpoint.path}
+                      </a>
+                    )}
+                  </li>
+                );
+              })}
             </ul>
           </div>
         </section>
@@ -100,12 +90,11 @@ export default function Home() {
           <div className="rounded-2xl border border-slate-800 bg-slate-900/40 p-6">
             <h2 className="text-lg font-semibold">Status</h2>
             <p className="mt-2 text-sm text-slate-300">
-              This UI is a lightweight console. Next: add run creation and live
-              status checks.
+              Console includes run creation, run traces, memory store, and eval
+              dashboards. Health and version are checked live above.
             </p>
           </div>
         </aside>
-      </main>
-    </div>
+    </main>
   );
 }
