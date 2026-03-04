@@ -135,6 +135,27 @@ export default function RunDetailPage({
                   <p className="mt-2 text-xs text-slate-400">
                     {step.step_id}
                   </p>
+                  {(step.started_at || step.finished_at) ? (
+                    <p className="mt-1 text-xs text-slate-500">
+                      {step.started_at
+                        ? `Started ${formatTimestamp(step.started_at)}`
+                        : ""}
+                      {step.started_at && step.finished_at ? " · " : ""}
+                      {step.finished_at
+                        ? `Finished ${formatTimestamp(step.finished_at)}`
+                        : ""}
+                    </p>
+                  ) : null}
+                  {step.output && Object.keys(step.output).length > 0 ? (
+                    <div className="mt-3 rounded-lg border border-slate-800 bg-slate-900/60 px-3 py-2">
+                      <p className="text-xs uppercase text-slate-500">
+                        Output
+                      </p>
+                      <pre className="mt-1 overflow-auto text-xs text-slate-300">
+                        {JSON.stringify(step.output, null, 2)}
+                      </pre>
+                    </div>
+                  ) : null}
                 </div>
               ))}
               {detail.payload.steps.length === 0 ? (
