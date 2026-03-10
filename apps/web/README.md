@@ -37,3 +37,4 @@ This project uses [`next/font`](https://nextjs.org/docs/app/building-your-applic
 
 - This UI is a lightweight console for the runtime API.
 - Extend it with pages for runs, memory, and evals as the backend matures.
+- You can override the runtime base per-session by passing a `runtimeBase` query parameter in the URL (for example, `/?runtimeBase=http://localhost:8001/api/v1`).
