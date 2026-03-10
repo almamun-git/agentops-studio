@@ -92,12 +92,17 @@ export default function MemoryPage() {
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100">
       <div className="mx-auto max-w-5xl px-6 py-10">
-        <a
-          href="/"
-          className="mb-4 inline-block text-sm text-slate-400 hover:text-emerald-300"
-        >
-          ← Back to home
-        </a>
+        <nav className="mb-4 flex items-center justify-between text-sm">
+          <a
+            href="/"
+            className="inline-block text-slate-400 hover:text-emerald-300"
+          >
+            ← Back to home
+          </a>
+          <span className="font-mono text-xs text-slate-500">
+            Base: {runtimeBase}
+          </span>
+        </nav>
         <div className="rounded-2xl border border-slate-800 bg-slate-900/40 p-6">
           <h1 className="text-2xl font-semibold">Memory</h1>
           <p className="mt-2 text-sm text-slate-300">
