@@ -1,5 +1,21 @@
 "use client";
 
+type HeaderLinkProps = {
+  href: string;
+  children: React.ReactNode;
+};
+
+function HeaderLink({ href, children }: HeaderLinkProps) {
+  return (
+    <a
+      className="rounded-full border border-slate-700 px-3 py-1 hover:border-emerald-400 hover:text-emerald-300"
+      href={href}
+    >
+      {children}
+    </a>
+  );
+}
+
 export function AppHeader() {
   return (
     <header className="border-b border-slate-800">
@@ -11,30 +27,10 @@ export function AppHeader() {
           <h1 className="text-2xl font-semibold">Runtime Console</h1>
         </a>
         <nav className="flex items-center gap-3 text-xs text-slate-300">
-          <a
-            className="rounded-full border border-slate-700 px-3 py-1 hover:border-emerald-400 hover:text-emerald-300"
-            href="/"
-          >
-            Home
-          </a>
-          <a
-            className="rounded-full border border-slate-700 px-3 py-1 hover:border-emerald-400 hover:text-emerald-300"
-            href="/runs"
-          >
-            Runs
-          </a>
-          <a
-            className="rounded-full border border-slate-700 px-3 py-1 hover:border-emerald-400 hover:text-emerald-300"
-            href="/memory"
-          >
-            Memory
-          </a>
-          <a
-            className="rounded-full border border-slate-700 px-3 py-1 hover:border-emerald-400 hover:text-emerald-300"
-            href="/eval"
-          >
-            Eval
-          </a>
+          <HeaderLink href="/">Home</HeaderLink>
+          <HeaderLink href="/runs">Runs</HeaderLink>
+          <HeaderLink href="/memory">Memory</HeaderLink>
+          <HeaderLink href="/eval">Eval</HeaderLink>
           <span className="rounded-full border border-slate-700 px-3 py-1">
             Early Preview
           </span>
