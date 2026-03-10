@@ -113,18 +113,20 @@ export default function EvalPage() {
             Optionally link a workflow run and/or suite name.
           </p>
           <div className="mt-4 grid gap-4">
-            <label className="text-xs uppercase text-slate-400">
+            <label className="text-xs uppercase text-slate-400" htmlFor="eval-run-id">
               Run ID (optional)
               <input
+                id="eval-run-id"
                 className="mt-2 w-full max-w-md rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100"
                 value={runId}
                 onChange={(e) => setRunId(e.target.value)}
                 placeholder="Workflow run to evaluate"
               />
             </label>
-            <label className="text-xs uppercase text-slate-400">
+            <label className="text-xs uppercase text-slate-400" htmlFor="eval-suite">
               Suite (optional)
               <input
+                id="eval-suite"
                 className="mt-2 w-full max-w-md rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100"
                 value={suite}
                 onChange={(e) => setSuite(e.target.value)}
@@ -148,9 +150,10 @@ export default function EvalPage() {
         <div className="mt-6 rounded-2xl border border-slate-800 bg-slate-900/40 p-6">
           <h2 className="text-lg font-semibold">Get evaluation by ID</h2>
           <div className="mt-4 flex flex-wrap items-end gap-3">
-            <label className="text-xs uppercase text-slate-400">
+            <label className="text-xs uppercase text-slate-400" htmlFor="eval-id">
               Eval ID
               <input
+                id="eval-id"
                 className="mt-2 block w-64 rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 font-mono text-sm text-slate-100"
                 value={fetchId}
                 onChange={(e) => setFetchId(e.target.value)}
