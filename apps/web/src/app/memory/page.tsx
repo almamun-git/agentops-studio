@@ -116,9 +116,10 @@ export default function MemoryPage() {
             Runtime base: <span className="font-mono text-slate-200">{runtimeBase}</span>
           </p>
           <div className="mt-4 flex flex-wrap items-end gap-3">
-            <label className="text-xs uppercase text-slate-400">
+            <label className="text-xs uppercase text-slate-400" htmlFor="user-id">
               User ID
               <input
+                id="user-id"
                 className="mt-2 block w-56 rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100"
                 value={userId}
                 onChange={(e) => setUserId(e.target.value)}
@@ -143,17 +144,19 @@ export default function MemoryPage() {
             <div className="mt-6 rounded-2xl border border-slate-800 bg-slate-900/40 p-6">
               <h2 className="text-lg font-semibold">Add or update</h2>
               <div className="mt-4 grid gap-4">
-                <label className="text-xs uppercase text-slate-400">
+                <label className="text-xs uppercase text-slate-400" htmlFor="memory-key">
                   Key
                   <input
+                    id="memory-key"
                     className="mt-2 w-full max-w-md rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100"
                     value={upsertKey}
                     onChange={(e) => setUpsertKey(e.target.value)}
                   />
                 </label>
-                <label className="text-xs uppercase text-slate-400">
+                <label className="text-xs uppercase text-slate-400" htmlFor="memory-value">
                   Value (JSON)
                   <textarea
+                    id="memory-value"
                     className="mt-2 min-h-[80px] w-full max-w-md rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 font-mono text-sm text-slate-100"
                     value={upsertValue}
                     onChange={(e) => setUpsertValue(e.target.value)}
