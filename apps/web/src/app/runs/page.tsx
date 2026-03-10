@@ -104,17 +104,19 @@ export default function RunsPage() {
             <span className="font-mono text-slate-200">{runtimeBase}</span>
           </p>
           <div className="mt-4 grid gap-4">
-            <label className="text-xs uppercase text-slate-400">
+            <label className="text-xs uppercase text-slate-400" htmlFor="workflow-id">
               Workflow ID
               <input
+                id="workflow-id"
                 className="mt-2 w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100"
                 value={workflowId}
                 onChange={(event) => setWorkflowId(event.target.value)}
               />
             </label>
-            <label className="text-xs uppercase text-slate-400">
+            <label className="text-xs uppercase text-slate-400" htmlFor="input-json">
               Input JSON
               <textarea
+                id="input-json"
                 className="mt-2 min-h-[120px] w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100"
                 value={inputJson}
                 onChange={(event) => setInputJson(event.target.value)}
