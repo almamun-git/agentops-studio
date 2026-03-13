@@ -85,7 +85,7 @@ export default function EvalPage() {
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100">
       <div className="mx-auto max-w-5xl px-6 py-10">
-        <nav className="mb-4 flex items-center justify-between text-sm">
+        <nav className="mb-4 flex flex-wrap items-center justify-between gap-2 text-sm">
           <a
             href="/"
             className="inline-block text-slate-400 hover:text-emerald-300"
