@@ -54,7 +54,11 @@ export function HealthCard() {
       <p className="mt-2 text-sm text-slate-300">
         Ping the runtime API to verify connectivity.
       </p>
-      <div className="mt-4 rounded-xl border border-slate-800 bg-slate-950 px-4 py-3">
+      <div
+        className="mt-4 rounded-xl border border-slate-800 bg-slate-950 px-4 py-3"
+        role="status"
+        aria-live="polite"
+      >
         {health.state === "idle" || health.state === "loading" ? (
           <p className="text-xs text-slate-400">Checking runtime...</p>
         ) : null}
