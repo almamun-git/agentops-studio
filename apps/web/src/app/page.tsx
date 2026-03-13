@@ -84,7 +84,10 @@ export default function Home() {
             <ol className="mt-3 space-y-2 text-sm text-slate-300">
               <li>1. Start the runtime: <code>make dev-runtime</code></li>
               <li>2. Open the runtime docs: {runtimeBase}</li>
-              <li>3. Use the pages below to create runs, inspect steps, manage memory, and launch evals.</li>
+              <li>
+                3. Use the pages below to create runs, inspect steps, manage
+                memory, and launch evals.
+              </li>
             </ol>
           </div>
           <div className="rounded-2xl border border-slate-800 bg-slate-900/40 p-6">
